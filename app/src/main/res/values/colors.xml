@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="swipe_background_red">#EA4335</color>
+    <color name="card_title_text_dark">#e3e6ed</color>
+
+    <!-- Main FAB Light -->
+    <color name="main_fab_background_light">#dce2fa</color>
+    <color name="main_fab_text_light">#1c2336</color>
+
+    <!-- Scan Button Light -->
+    <color name="scan_button_text_light">#10172a</color>
+
+    <!-- Light Theme -->
+    <color name="primary_light">#465d91</color>
+    <color name="secondary_container_light">#ededf7</color>
+    <color name="app_background_light">#FAF9FF</color>
+    <color name="card_light">#E6E8F4</color>
+
+    <!-- Main FAB Dark -->
+    <color name="main_fab_background_dark">#3f4659</color>
+    <color name="main_fab_text_dark">#dbe1f7</color>
+
+    <!-- Scan Button Dark -->
+    <color name="scan_button_text_dark">#e0e3ea</color>
+
+    <!-- Dark Theme -->
+    <color name="primary_dark">#adc6ff</color>
+    <color name="secondary_container_dark">#1c1f26</color>
+    <color name="app_background_dark">#10131A</color>
+    <color name="card_dark">#212531</color>
+</resources>

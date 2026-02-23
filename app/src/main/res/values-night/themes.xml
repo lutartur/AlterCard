@@ -1,0 +1,16 @@
+<resources>
+    <style name="Theme.Alterpay" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorPrimaryContainer">@color/secondary_container_dark</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/app_background_dark</item>
+        <item name="colorSurfaceVariant">@color/card_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+
+        <!-- Edge-to-edge -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

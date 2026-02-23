@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AlterPay</string>
+    <string name="add_new_card">Добавить</string>
+    <string name="hint_card_name">Название карты</string>
+    <string name="hint_card_number">Номер карты</string>
+    <string name="button_add">Добавить</string>
+    <string name="button_scan">Сканировать карту</string>
+    <string name="barcode_image">Barcode image</string>
+    <string name="action_delete">Удалить</string>
+    <string name="title_activity_add_card">Добавить карту</string>
+</resources>
