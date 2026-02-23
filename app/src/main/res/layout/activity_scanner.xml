@@ -62,10 +62,10 @@
         android:text="@string/scanner_prompt"
         android:textColor="@android:color/white"
         android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/scanner_frame"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="32dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:layout_width="0dp"
