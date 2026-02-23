@@ -29,5 +29,6 @@
 
     <style name="AddButton" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/add_button_background_dark</item>
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
     </style>
 </resources>
