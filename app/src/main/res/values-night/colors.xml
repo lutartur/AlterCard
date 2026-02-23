@@ -7,4 +7,5 @@
     <color name="card_text_dark">#e0e3ea</color>
     <color name="scan_button_background_dark">#2c2f36</color>
     <color name="add_button_background_dark">#adc6ff</color>
+    <color name="barcode_icon_color">#FFFFFFFF</color>
 </resources>

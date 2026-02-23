@@ -21,9 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddCardActivity" android:label="" />
+        <activity
+            android:name=".AddCardActivity"
+            android:label=""
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ScannerActivity" />
-        <activity android:name=".CardDetailActivity" android:label="" />
+        <activity
+            android:name=".CardDetailActivity"
+            android:label="" />
     </application>
 
 </manifest>

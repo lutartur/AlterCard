@@ -4,7 +4,6 @@
     android:id="@+id/add_card_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="?attr/colorSurface"
     android:orientation="vertical">
 
@@ -73,6 +72,10 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:text="@string/button_scan"
+            android:gravity="center"
+            app:icon="@drawable/barcode_label"
+            app:iconSize="32dp"
+            app:iconPadding="-24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_number_layout" />

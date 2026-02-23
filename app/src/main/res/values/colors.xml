@@ -27,6 +27,10 @@
 
     <!-- Scan Button Dark -->
     <color name="scan_button_text_dark">#e0e3ea</color>
+    <color name="scan_button_background_dark">#2c2f36</color>
+
+    <!-- Add Button Dark -->
+    <color name="add_button_background_dark">#adc6ff</color>
 
     <!-- Dark Theme -->
     <color name="primary_dark">#adc6ff</color>
@@ -36,4 +40,6 @@
     <color name="card_text_dark">#000000</color>
     <color name="button_background_dark">#3f4659</color>
     <color name="button_text_dark">#d9e0f3</color>
+
+    <color name="barcode_icon_color">#FF000000</color>
 </resources>

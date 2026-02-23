@@ -1,7 +1,6 @@
 package com.altercard
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -27,7 +26,7 @@ class AddCardActivity : AppCompatActivity() {
 
     private val scanBarcodeLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == RESULT_OK) {
             result.data?.let {
                 barcodeData = it.getStringExtra(ScannerActivity.EXTRA_BARCODE_DATA)
                 barcodeFormat = it.getStringExtra(ScannerActivity.EXTRA_BARCODE_FORMAT)
@@ -56,7 +55,8 @@ class AddCardActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.add_card_container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom + ime.bottom)
             insets
         }
 
@@ -79,7 +79,7 @@ class AddCardActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             val replyIntent = Intent()
             if (TextUtils.isEmpty(editCardName.text) || TextUtils.isEmpty(editCardNumber.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
+                setResult(RESULT_CANCELED, replyIntent)
             } else {
                 val cardName = editCardName.text.toString()
                 val cardNumber = editCardNumber.text.toString()
@@ -88,7 +88,7 @@ class AddCardActivity : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_BARCODE_DATA, barcodeData ?: cardNumber)
                 // If no barcode was scanned, default to CODE_128
                 replyIntent.putExtra(EXTRA_BARCODE_FORMAT, barcodeFormat ?: BarcodeFormat.CODE_128.name)
-                setResult(Activity.RESULT_OK, replyIntent)
+                setResult(RESULT_OK, replyIntent)
                 finish()
             }
         }
