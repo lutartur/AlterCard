@@ -54,7 +54,7 @@
             style="@style/RoundedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/card_name_layout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -70,7 +70,7 @@
             style="@style/RoundedButton"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/button_scan"
             android:gravity="center"
             app:icon="@drawable/barcode_label"
@@ -83,9 +83,9 @@
         <Button
             android:id="@+id/button_add"
             style="@style/AddButton"
-            android:layout_width="280dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="0dp"
             android:text="@string/button_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
