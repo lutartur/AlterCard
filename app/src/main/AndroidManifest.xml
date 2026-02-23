@@ -21,9 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddCardActivity" />
+        <activity android:name=".AddCardActivity" android:label="" />
         <activity android:name=".ScannerActivity" />
-        <activity android:name=".CardDetailActivity" />
+        <activity android:name=".CardDetailActivity" android:label="" />
     </application>
 
 </manifest>

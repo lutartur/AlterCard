@@ -10,6 +10,10 @@
 
     <!-- Scan Button Light -->
     <color name="scan_button_text_light">#10172a</color>
+    <color name="scan_button_background_light">#e0e2f1</color>
+
+    <!-- Add Button Light -->
+    <color name="add_button_background_light">#465d91</color>
 
     <!-- Light Theme -->
     <color name="primary_light">#465d91</color>

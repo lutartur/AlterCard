@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,7 +16,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/title_activity_add_card"
             app:navigationIcon="@drawable/ic_arrow_back" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -25,13 +25,23 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/add_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_activity_add_card"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="16dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/card_name_layout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/RoundedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="48dp">
+            app:layout_constraintTop_toBottomOf="@id/add_card_title"
+            android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_card_name"
@@ -42,7 +52,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/card_number_layout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/RoundedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -58,9 +68,9 @@
 
         <Button
             android:id="@+id/button_scan"
-            style="@style/Widget.Material3.Button.TonalButton"
+            style="@style/RoundedButton"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="80dp"
             android:layout_marginTop="16dp"
             android:text="@string/button_scan"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +79,7 @@
 
         <Button
             android:id="@+id/button_add"
-            style="@style/Widget.Material3.Button"
+            style="@style/AddButton"
             android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_marginBottom="32dp"

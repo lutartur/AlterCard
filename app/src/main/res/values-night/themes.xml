@@ -15,4 +15,14 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="RoundedButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
+        <item name="backgroundTint">@color/scan_button_background_dark</item>
+        <item name="android:textColor">@color/scan_button_text_dark</item>
+    </style>
+
+    <style name="AddButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/add_button_background_dark</item>
+    </style>
 </resources>
