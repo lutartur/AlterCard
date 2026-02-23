@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import android.Manifest
 import android.app.Activity
@@ -110,9 +110,9 @@ class AddCardActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_NAME = "com.alterpay.card.NAME"
-        const val EXTRA_NUMBER = "com.alterpay.card.NUMBER"
-        const val EXTRA_BARCODE_DATA = "com.alterpay.card.BARCODE_DATA"
-        const val EXTRA_BARCODE_FORMAT = "com.alterpay.card.BARCODE_FORMAT"
+        const val EXTRA_NAME = "com.altercard.card.NAME"
+        const val EXTRA_NUMBER = "com.altercard.card.NUMBER"
+        const val EXTRA_BARCODE_DATA = "com.altercard.card.BARCODE_DATA"
+        const val EXTRA_BARCODE_FORMAT = "com.altercard.card.BARCODE_FORMAT"
     }
 }

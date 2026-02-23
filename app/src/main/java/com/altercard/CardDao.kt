@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import androidx.room.Dao
 import androidx.room.Delete

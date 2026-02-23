@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlterPay</string>
+    <string name="app_name">altercard</string>
     <string name="add_new_card">Добавить</string>
     <string name="hint_card_name">Название карты</string>
     <string name="hint_card_number">Номер карты</string>

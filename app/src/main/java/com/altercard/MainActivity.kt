@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import android.app.Activity
 import android.content.Intent
@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory((application as AlterpayApplication).repository)
+        CardViewModelFactory((application as altercardApplication).repository)
     }
 
     private val addCardActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import android.content.Intent
 import android.view.LayoutInflater

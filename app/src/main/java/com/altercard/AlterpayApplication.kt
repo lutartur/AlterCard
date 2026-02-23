@@ -1,8 +1,8 @@
-package com.alterpay
+package com.altercard
 
 import android.app.Application
 
-class AlterpayApplication : Application() {
+class altercardApplication : Application() {
     val database by lazy { AppDatabase.getDatabase(this) }
     val repository by lazy { CardRepository(database.cardDao()) }
 }

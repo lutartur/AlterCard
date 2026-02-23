@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,7 +11,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.alterpay.databinding.ActivityScannerBinding
+import com.altercard.databinding.ActivityScannerBinding
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -114,7 +114,7 @@ class ScannerActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "ScannerActivity"
-        const val EXTRA_BARCODE_DATA = "com.alterpay.scanner.BARCODE_DATA"
-        const val EXTRA_BARCODE_FORMAT = "com.alterpay.scanner.BARCODE_FORMAT"
+        const val EXTRA_BARCODE_DATA = "com.altercard.scanner.BARCODE_DATA"
+        const val EXTRA_BARCODE_FORMAT = "com.altercard.scanner.BARCODE_FORMAT"
     }
 }

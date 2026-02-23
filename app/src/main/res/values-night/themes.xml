@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.Alterpay" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.altercard" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_dark</item>
         <item name="colorPrimaryContainer">@color/secondary_container_dark</item>

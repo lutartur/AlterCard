@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.alterpay"
+    namespace = "com.altercard"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.alterpay"
+        applicationId = "com.altercard"
         minSdk = 31
         targetSdk = 34
         versionCode = 1

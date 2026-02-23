@@ -1,4 +1,4 @@
-package com.alterpay
+package com.altercard
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -20,7 +20,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 class CardDetailActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory((application as AlterpayApplication).repository)
+        CardViewModelFactory((application as altercardApplication).repository)
     }
 
     private var currentCard: Card? = null
@@ -106,6 +106,6 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_ID = "com.alterpay.card.ID"
+        const val EXTRA_ID = "com.altercard.card.ID"
     }
 }
