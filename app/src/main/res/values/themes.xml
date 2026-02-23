@@ -30,6 +30,10 @@
         <item name="backgroundTint">@color/add_button_background_light</item>
     </style>
 
+    <style name="RoundedOutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
+    </style>
+
     <style name="RoundedShapeAppearance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>

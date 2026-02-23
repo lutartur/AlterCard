@@ -10,4 +10,7 @@
     <string name="action_rename">Изменить имя</string>
     <string name="action_settings">Настройки</string>
     <string name="title_activity_add_card">Добавить карту</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="button_manual_input">Ввести вручную</string>
+    <string name="button_scan_from_file">Из файла</string>
 </resources>

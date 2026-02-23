@@ -41,4 +41,5 @@
     <color name="button_text_dark">#d9e0f3</color>
 
     <color name="barcode_icon_color">#FF000000</color>
+    <color name="scanner_overlay_color">#B0000000</color>
 </resources>

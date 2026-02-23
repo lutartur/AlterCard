@@ -1,10 +1,11 @@
 package com.altercard
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -23,12 +24,36 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScannerBinding
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
+    private val scanFromFileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.data?.let {
+                val image = InputImage.fromFilePath(this, it)
+                processImage(image)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         startCamera()
+
+        findViewById<Button>(R.id.button_cancel).setOnClickListener {
+            finish()
+        }
+
+        findViewById<Button>(R.id.button_manual_input).setOnClickListener {
+            finish()
+        }
+
+        findViewById<Button>(R.id.button_scan_from_file).setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            scanFromFileLauncher.launch(intent)
+        }
     }
 
     private fun startCamera() {
@@ -51,13 +76,7 @@ class ScannerActivity : AppCompatActivity() {
                 .also {
                     it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcode ->
                         // When barcode is detected, stop the camera and return the result
-                        cameraExecutor.shutdown()
-                        val intent = Intent().apply {
-                            putExtra(EXTRA_BARCODE_DATA, barcode.rawValue)
-                            putExtra(EXTRA_BARCODE_FORMAT, barcode.format.toString())
-                        }
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
+                        processBarcode(barcode)
                     })
                 }
 
@@ -77,6 +96,29 @@ class ScannerActivity : AppCompatActivity() {
             }
 
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun processImage(image: InputImage) {
+        val scanner = BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build())
+        scanner.process(image)
+            .addOnSuccessListener { barcodes ->
+                if (barcodes.isNotEmpty()) {
+                    processBarcode(barcodes[0])
+                }
+            }
+            .addOnFailureListener {
+                Log.e(TAG, "Barcode scanning from file failed", it)
+            }
+    }
+
+    private fun processBarcode(barcode: Barcode) {
+        cameraExecutor.shutdown()
+        val intent = Intent().apply {
+            putExtra(EXTRA_BARCODE_DATA, barcode.rawValue)
+            putExtra(EXTRA_BARCODE_FORMAT, barcode.format)
+        }
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     private class BarcodeAnalyzer(private val listener: (barcode: Barcode) -> Unit) : ImageAnalysis.Analyzer {
