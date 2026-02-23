@@ -2,7 +2,7 @@
     <style name="Theme.altercard" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_light</item>
-        <item name="colorPrimaryContainer">@color/secondary_container_light</item>
+        <item name="colorPrimaryContainer">@color/main_fab_background_light</item>
 
         <!-- Surface colors -->
         <item name="colorSurface">@color/app_background_light</item>

@@ -14,8 +14,8 @@
     <!-- Light Theme -->
     <color name="primary_light">#465d91</color>
     <color name="secondary_container_light">#ededf7</color>
-    <color name="app_background_light">#FAF9FF</color>
-    <color name="card_light">#E6E8F4</color>
+    <color name="app_background_light">#faf9ff</color>
+    <color name="card_light">#ededf7</color>
 
     <!-- Main FAB Dark -->
     <color name="main_fab_background_dark">#3f4659</color>
