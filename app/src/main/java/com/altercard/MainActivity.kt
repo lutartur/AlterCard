@@ -1,6 +1,5 @@
 package com.altercard
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Canvas
 import androidx.appcompat.app.AppCompatActivity
@@ -19,12 +18,12 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory((application as altercardApplication).repository)
+        CardViewModelFactory((application as AltercardApplication).repository)
     }
 
     private val addCardActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 result.data?.let {
                     val name = it.getStringExtra(AddCardActivity.EXTRA_NAME)
                     val number = it.getStringExtra(AddCardActivity.EXTRA_NUMBER)

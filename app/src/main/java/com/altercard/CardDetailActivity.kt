@@ -20,7 +20,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 class CardDetailActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory((application as altercardApplication).repository)
+        CardViewModelFactory((application as AltercardApplication).repository)
     }
 
     private var currentCard: Card? = null

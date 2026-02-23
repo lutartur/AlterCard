@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">altercard</string>
+    <string name="app_name">AlterCard</string>
     <string name="add_new_card">Добавить</string>
     <string name="hint_card_name">Название карты</string>
     <string name="hint_card_number">Номер карты</string>
@@ -8,4 +8,5 @@
     <string name="barcode_image">Barcode image</string>
     <string name="action_delete">Удалить</string>
     <string name="title_activity_add_card">Добавить карту</string>
+    <string name="action_share">Поделиться</string>
 </resources>
