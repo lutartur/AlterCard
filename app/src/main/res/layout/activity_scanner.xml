@@ -9,21 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- The outer frame that the corners will be drawn in -->
     <View
-        android:id="@+id/scanner_frame"
-        android:layout_width="280dp"
-        android:layout_height="250dp"
+        android:id="@+id/scanner_frame_outer"
+        android:layout_width="274dp"
+        android:layout_height="244dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- The inner, transparent window -->
+    <View
+        android:id="@+id/scanner_window_inner"
+        android:layout_width="266dp"
+        android:layout_height="236dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Overlay Views that create the transparent window -->
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/scanner_overlay_color"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/scanner_frame"
+        app:layout_constraintBottom_toTopOf="@id/scanner_window_inner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -31,7 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/scanner_overlay_color"
-        app:layout_constraintTop_toBottomOf="@id/scanner_frame"
+        app:layout_constraintTop_toBottomOf="@id/scanner_window_inner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -40,18 +52,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/scanner_overlay_color"
-        app:layout_constraintTop_toTopOf="@id/scanner_frame"
-        app:layout_constraintBottom_toBottomOf="@id/scanner_frame"
+        app:layout_constraintTop_toTopOf="@id/scanner_window_inner"
+        app:layout_constraintBottom_toBottomOf="@id/scanner_window_inner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/scanner_frame" />
+        app:layout_constraintEnd_toStartOf="@id/scanner_window_inner" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/scanner_overlay_color"
-        app:layout_constraintTop_toTopOf="@id/scanner_frame"
-        app:layout_constraintBottom_toBottomOf="@id/scanner_frame"
-        app:layout_constraintStart_toEndOf="@id/scanner_frame"
+        app:layout_constraintTop_toTopOf="@id/scanner_window_inner"
+        app:layout_constraintBottom_toBottomOf="@id/scanner_window_inner"
+        app:layout_constraintStart_toEndOf="@id/scanner_window_inner"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -63,18 +75,19 @@
         android:textColor="@android:color/white"
         android:textSize="15sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/scanner_frame"
+        app:layout_constraintBottom_toTopOf="@id/scanner_frame_outer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- This View draws the corners on the outer frame -->
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/scanner_overlay"
-        app:layout_constraintTop_toTopOf="@id/scanner_frame"
-        app:layout_constraintBottom_toBottomOf="@id/scanner_frame"
-        app:layout_constraintStart_toStartOf="@id/scanner_frame"
-        app:layout_constraintEnd_toEndOf="@id/scanner_frame" />
+        app:layout_constraintTop_toTopOf="@id/scanner_frame_outer"
+        app:layout_constraintBottom_toBottomOf="@id/scanner_frame_outer"
+        app:layout_constraintStart_toStartOf="@id/scanner_frame_outer"
+        app:layout_constraintEnd_toEndOf="@id/scanner_frame_outer" />
 
     <LinearLayout
         android:layout_width="match_parent"

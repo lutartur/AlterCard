@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <stroke
-                android:width="2dp"
-                android:color="@android:color/white" />
-            <corners android:radius="16dp" />
-        </shape>
-    </item>
-</layer-list>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Top-left corner -->
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="4"
+        android:pathData="M0,15 L0,10 C0,4.477 4.477,0 10,0 L15,0" />
+
+    <!-- Top-right corner -->
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="4"
+        android:pathData="M85,0 L90,0 C95.523,0 100,4.477 100,10 L100,15" />
+
+    <!-- Bottom-left corner -->
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="4"
+        android:pathData="M15,100 L10,100 C4.477,100 0,95.523 0,90 L0,85" />
+
+    <!-- Bottom-right corner -->
+    <path
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="4"
+        android:pathData="M100,85 L100,90 C100,95.523 95.523,100 90,100 L85,100" />
+
+</vector>
