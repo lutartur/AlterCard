@@ -7,26 +7,22 @@
 
     <!-- Top-left corner -->
     <path
-        android:strokeColor="@android:color/white"
-        android:strokeWidth="4"
-        android:pathData="M0,15 L0,10 C0,4.477 4.477,0 10,0 L15,0" />
+        android:fillColor="@android:color/white"
+        android:pathData="M20,0 L10,0 A10,10 0 0,0 0,10 L0,20 L4,20 L4,10 A6,6 0 0,1 10,4 L20,4 L20,0Z" />
 
     <!-- Top-right corner -->
     <path
-        android:strokeColor="@android:color/white"
-        android:strokeWidth="4"
-        android:pathData="M85,0 L90,0 C95.523,0 100,4.477 100,10 L100,15" />
+        android:fillColor="@android:color/white"
+        android:pathData="M80,0 L80,4 L90,4 A6,6 0 0,1 96,10 L96,20 L100,20 L100,10 A10,10 0 0,0 90,0 L80,0Z" />
 
     <!-- Bottom-left corner -->
     <path
-        android:strokeColor="@android:color/white"
-        android:strokeWidth="4"
-        android:pathData="M15,100 L10,100 C4.477,100 0,95.523 0,90 L0,85" />
+        android:fillColor="@android:color/white"
+        android:pathData="M20,100 L20,96 L10,96 A6,6 0 0,1 4,90 L4,80 L0,80 L0,90 A10,10 0 0,0 10,100 L20,100Z" />
 
     <!-- Bottom-right corner -->
     <path
-        android:strokeColor="@android:color/white"
-        android:strokeWidth="4"
-        android:pathData="M100,85 L100,90 C100,95.523 95.523,100 90,100 L85,100" />
+        android:fillColor="@android:color/white"
+        android:pathData="M80,100 L90,100 A10,10 0 0,0 100,90 L100,80 L96,80 L96,90 A6,6 0 0,1 90,96 L80,96 L80,100Z" />
 
 </vector>
