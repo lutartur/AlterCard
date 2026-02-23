@@ -13,4 +13,5 @@
     <string name="button_cancel">Отмена</string>
     <string name="button_manual_input">Ввести вручную</string>
     <string name="button_scan_from_file">Из файла</string>
+    <string name="scanner_prompt">Поместите штрихкод в центр рамки</string>
 </resources>

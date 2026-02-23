@@ -132,9 +132,20 @@ class ScannerActivity : AppCompatActivity() {
 
                 scanner.process(image)
                     .addOnSuccessListener { barcodes ->
-                        if (barcodes.isNotEmpty()) {
-                            // We only need one barcode, so take the first one
-                            listener(barcodes[0])
+                        for (barcode in barcodes) {
+                            // Process only barcodes that are within the center of the screen
+                            val barcodeBoundingBox = barcode.boundingBox
+                            val imageWidth = imageProxy.width
+                            val imageHeight = imageProxy.height
+
+                            if (barcodeBoundingBox != null &&
+                                barcodeBoundingBox.left > imageWidth * 0.2 &&
+                                barcodeBoundingBox.right < imageWidth * 0.8 &&
+                                barcodeBoundingBox.top > imageHeight * 0.2 &&
+                                barcodeBoundingBox.bottom < imageHeight * 0.8) {
+                                listener(barcode)
+                                return@addOnSuccessListener
+                            }
                         }
                     }
                     .addOnFailureListener {
