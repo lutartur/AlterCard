@@ -9,6 +9,9 @@
         <item name="colorSurfaceVariant">@color/card_light</item>
         <item name="android:windowBackground">@color/app_background_light</item>
 
+        <!-- Other colors -->
+        <item name="colorControlNormal">@color/primary_light</item>
+
         <!-- Edge-to-edge -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
