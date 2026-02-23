@@ -29,4 +29,7 @@
     <color name="secondary_container_dark">#1c1f26</color>
     <color name="app_background_dark">#10131A</color>
     <color name="card_dark">#212531</color>
+    <color name="card_text_dark">#000000</color>
+    <color name="button_background_dark">#dce2fa</color>
+    <color name="button_text_dark">#1c2336</color>
 </resources>

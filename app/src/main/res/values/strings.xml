@@ -8,5 +8,4 @@
     <string name="barcode_image">Barcode image</string>
     <string name="action_delete">Удалить</string>
     <string name="title_activity_add_card">Добавить карту</string>
-    <string name="action_share">Поделиться</string>
 </resources>
