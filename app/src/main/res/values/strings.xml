@@ -7,5 +7,7 @@
     <string name="button_scan">Сканировать карту</string>
     <string name="barcode_image">Barcode image</string>
     <string name="action_delete">Удалить</string>
+    <string name="action_rename">Изменить имя</string>
+    <string name="action_settings">Настройки</string>
     <string name="title_activity_add_card">Добавить карту</string>
 </resources>

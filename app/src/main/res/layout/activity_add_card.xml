@@ -92,7 +92,7 @@
                 android:layout_gravity="center"
                 android:text="@string/button_scan"
                 android:textAppearance="@style/NormalCaseButton"
-                android:textColor="?attr/colorOnSecondaryContainer" />
+                android:textColor="@color/barcode_icon_color" />
 
         </FrameLayout>
 

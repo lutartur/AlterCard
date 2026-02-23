@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageButton
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -29,13 +29,12 @@ class CardDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        title = "" // Set the title to an empty string
         setContentView(R.layout.activity_card_detail)
 
-        val backButton = findViewById<ImageButton>(R.id.back_button)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "" // Ensure title is empty
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.card_detail_container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -84,12 +83,46 @@ class CardDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_delete -> {
-                showDeleteConfirmationDialog()
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            R.id.action_settings -> {
+                showSettingsDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showSettingsDialog() {
+        val items = arrayOf(getString(R.string.action_rename), getString(R.string.action_delete))
+        MaterialAlertDialogBuilder(this)
+            .setItems(items) { _, which ->
+                when (which) {
+                    0 -> showRenameDialog()
+                    1 -> showDeleteConfirmationDialog()
+                }
+            }
+            .show()
+    }
+
+    private fun showRenameDialog() {
+        val editText = EditText(this)
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.action_rename)
+            .setView(editText)
+            .setPositiveButton(R.string.button_add) { _, _ ->
+                val newName = editText.text.toString()
+                if (newName.isNotEmpty()) {
+                    currentCard?.let {
+                        val updatedCard = it.copy(name = newName)
+                        cardViewModel.update(updatedCard)
+                    }
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     private fun showDeleteConfirmationDialog() {

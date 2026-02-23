@@ -19,6 +19,10 @@ class CardViewModel(private val repository: CardRepository) : ViewModel() {
         repository.insert(card)
     }
 
+    fun update(card: Card) = viewModelScope.launch {
+        repository.update(card)
+    }
+
     fun delete(card: Card) = viewModelScope.launch {
         repository.delete(card)
     }
