@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="DiscouragedApi,LockedOrientationActivity">
 
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -15,7 +17,8 @@
         android:memtagMode="async">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +27,15 @@
         <activity
             android:name=".AddCardActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ScannerActivity" />
+        <activity
+            android:name=".ScannerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CardDetailActivity"
-            android:label="" />
+            android:label=""
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
