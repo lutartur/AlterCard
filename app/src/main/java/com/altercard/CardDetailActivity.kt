@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
@@ -84,7 +85,8 @@ class CardDetailActivity : AppCompatActivity() {
                 val format = BarcodeFormat.valueOf(barcodeFormatStr)
                 val multiFormatWriter = MultiFormatWriter()
                 val (w, h) = if (format == BarcodeFormat.QR_CODE) 800 to 800 else 800 to 200
-                val bitMatrix = multiFormatWriter.encode(barcodeData, format, w, h)
+                val hints = mapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
+                val bitMatrix = multiFormatWriter.encode(barcodeData, format, w, h, hints)
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
                 barcodeImageView.setImageBitmap(bitmap)
