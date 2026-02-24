@@ -128,10 +128,10 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun showDeleteConfirmationDialog() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Удалить карту")
-            .setMessage("Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.")
-            .setNegativeButton("Отмена", null)
-            .setPositiveButton("Удалить") { _, _ ->
+            .setTitle(R.string.delete_card_title)
+            .setMessage(R.string.delete_card_message)
+            .setNegativeButton(R.string.button_cancel, null)
+            .setPositiveButton(R.string.action_delete) { _, _ ->
                 currentCard?.let { cardViewModel.delete(it) }
             }
             .show()

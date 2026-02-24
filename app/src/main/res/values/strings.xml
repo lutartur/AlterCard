@@ -15,4 +15,6 @@
     <string name="button_scan_from_file">Из файла</string>
     <string name="scanner_prompt">Поместите штрихкод в центр рамки</string>
     <string name="action_navigate_back">Navigate back</string>
+    <string name="delete_card_title">Удалить карту</string>
+    <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>
 </resources>
