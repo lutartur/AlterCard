@@ -18,6 +18,7 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import com.google.zxing.BarcodeFormat
 import java.util.concurrent.Executors
 
 class ScannerActivity : AppCompatActivity() {
@@ -109,10 +110,27 @@ class ScannerActivity : AppCompatActivity() {
         cameraExecutor.shutdown()
         val intent = Intent().apply {
             putExtra(EXTRA_BARCODE_DATA, barcode.rawValue)
-            putExtra(EXTRA_BARCODE_FORMAT, barcode.format)
+            putExtra(EXTRA_BARCODE_FORMAT, mlKitFormatToZxing(barcode.format))
         }
         setResult(RESULT_OK, intent)
         finish()
+    }
+
+    private fun mlKitFormatToZxing(mlKitFormat: Int): String = when (mlKitFormat) {
+        Barcode.FORMAT_CODE_128   -> BarcodeFormat.CODE_128.name
+        Barcode.FORMAT_CODE_39    -> BarcodeFormat.CODE_39.name
+        Barcode.FORMAT_CODE_93    -> BarcodeFormat.CODE_93.name
+        Barcode.FORMAT_CODABAR    -> BarcodeFormat.CODABAR.name
+        Barcode.FORMAT_DATA_MATRIX -> BarcodeFormat.DATA_MATRIX.name
+        Barcode.FORMAT_EAN_13     -> BarcodeFormat.EAN_13.name
+        Barcode.FORMAT_EAN_8      -> BarcodeFormat.EAN_8.name
+        Barcode.FORMAT_ITF        -> BarcodeFormat.ITF.name
+        Barcode.FORMAT_QR_CODE    -> BarcodeFormat.QR_CODE.name
+        Barcode.FORMAT_UPC_A      -> BarcodeFormat.UPC_A.name
+        Barcode.FORMAT_UPC_E      -> BarcodeFormat.UPC_E.name
+        Barcode.FORMAT_PDF417     -> BarcodeFormat.PDF_417.name
+        Barcode.FORMAT_AZTEC      -> BarcodeFormat.AZTEC.name
+        else                      -> BarcodeFormat.CODE_128.name
     }
 
     private class BarcodeAnalyzer(private val listener: (barcode: Barcode) -> Unit) : ImageAnalysis.Analyzer {
