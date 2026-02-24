@@ -45,6 +45,6 @@
     </style>
 
     <style name="Dialog.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="colorSurface">@color/card_light</item>
+        <item name="colorSurfaceContainerHigh">@color/card_light</item>
     </style>
 </resources>
