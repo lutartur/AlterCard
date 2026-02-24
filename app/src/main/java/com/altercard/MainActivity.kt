@@ -40,8 +40,10 @@ class MainActivity : AppCompatActivity() {
         when (result.resultCode) {
             RESULT_OK -> {
                 val barcodeData = result.data?.getStringExtra(ScannerActivity.EXTRA_BARCODE_DATA)
+                val barcodeFormat = result.data?.getStringExtra(ScannerActivity.EXTRA_BARCODE_FORMAT)
                 if (barcodeData != null) {
                     intent.putExtra(AddCardActivity.EXTRA_PREFILL_BARCODE_DATA, barcodeData)
+                    intent.putExtra(AddCardActivity.EXTRA_PREFILL_BARCODE_FORMAT, barcodeFormat)
                 }
                 addCardLauncher.launch(intent)
             }

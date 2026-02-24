@@ -65,7 +65,7 @@ class AddCardActivity : AppCompatActivity() {
 
         intent.getStringExtra(EXTRA_PREFILL_BARCODE_DATA)?.let { prefillData ->
             barcodeData = prefillData
-            barcodeFormat = BarcodeFormat.CODE_128.name
+            barcodeFormat = intent.getStringExtra(EXTRA_PREFILL_BARCODE_FORMAT) ?: BarcodeFormat.CODE_128.name
             editCardNumber.setText(prefillData)
         }
 
@@ -121,5 +121,6 @@ class AddCardActivity : AppCompatActivity() {
         const val EXTRA_BARCODE_DATA = "com.altercard.card.BARCODE_DATA"
         const val EXTRA_BARCODE_FORMAT = "com.altercard.card.BARCODE_FORMAT"
         const val EXTRA_PREFILL_BARCODE_DATA = "com.altercard.add.PREFILL_BARCODE_DATA"
+        const val EXTRA_PREFILL_BARCODE_FORMAT = "com.altercard.add.PREFILL_BARCODE_FORMAT"
     }
 }
