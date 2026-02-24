@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-mergeDebugResources-50:\\layout\\activity_card_detail.xml",
+        "source": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-main-53:\\layout\\activity_card_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-mergeDebugResources-50:\\layout\\activity_add_card.xml",
+        "source": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-main-53:\\layout\\activity_add_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-mergeDebugResources-50:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-main-53:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-mergeDebugResources-50:\\layout\\activity_scanner.xml",
+        "source": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-main-53:\\layout\\activity_scanner.xml"
+    },
+    {
+        "merged": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-mergeDebugResources-50:\\layout\\list_item_card.xml",
+        "source": "C:\\Users\\Art\\.gradle\\daemon\\9.1.0\\com.altercard.app-main-53:\\layout\\list_item_card.xml"
+    },
+    {
+        "merged": "com.altercard.app-mergeDebugResources-50:/layout/list_item_card.xml",
+        "source": "com.altercard.app-main-53:/layout/list_item_card.xml"
+    }
+]

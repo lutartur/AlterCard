@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/barcode_background.xml">
+        <config>
+          <theme>@style/Theme.altercard</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/scanner_corner_mask.xml">
+        <config>
+          <theme>@style/Theme.altercard</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/scanner_overlay.xml">
+        <config>
+          <theme>@style/Theme.altercard</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/scanner_window_inner.xml">
+        <config>
+          <theme>@style/Theme.altercard</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_card_detail.xml">
+        <config>
+          <theme>@style/Theme.Alterpay</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_card.xml">
+        <config>
+          <theme>@style/Theme.Alterpay</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
+        <config>
+          <theme>@style/Theme.Alterpay</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4a5f7ba5-be6e-4ca8-aebd-73d014341c83" name="Changes" comment="refactor scanner" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=47bedcbe]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lutartur&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lutartur/AlterCard&quot;,
+    &quot;accountId&quot;: &quot;a7ff96d8-b9d2-4d2b-bf8f-ed8e7b7d6dec&quot;
+  }
+}</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\Art\.gradle\wrapper\dists\gradle-9.1.0-bin\9agqghryom9wkf8r80qlhnts3\gradle-9.1.0" javaHome="C:\Program Files\Android\Android Studio\jbr" gradleVersion="9.1.0" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3A2j1KL3h63twQ8dC6lphU6RzE7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Android App.app.executor": "Run",
+    "Gradle.Configure Daemon JVM Criteria.executor": "Run",
+    "GradleDaemonJvmCriteriaMigrationNotification.isNotificationDisabled": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "F:/lab/altercard/app/src/main/res/drawable",
+    "recommended.upgrade.do.not.ask.for.project": "true",
+    "settings.editor.selected.configurable": "templates.modelproviders.configurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\lab\altercard\app\src\main\res\drawable" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="altercard.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4a5f7ba5-be6e-4ca8-aebd-73d014341c83" name="Changes" comment="" />
+      <created>1771797342618</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771797342618</updated>
+    </task>
+    <task id="LOCAL-00001" summary="wip: stable app">
+      <option name="closed" value="true" />
+      <created>1771852712501</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1771852712501</updated>
+    </task>
+    <task id="LOCAL-00002" summary="wip">
+      <option name="closed" value="true" />
+      <created>1771854235870</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1771854235870</updated>
+    </task>
+    <task id="LOCAL-00003" summary="wip">
+      <option name="closed" value="true" />
+      <created>1771855042765</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1771855042765</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix naming">
+      <option name="closed" value="true" />
+      <created>1771856206981</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1771856206981</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix colors">
+      <option name="closed" value="true" />
+      <created>1771857426754</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1771857426754</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix colors3">
+      <option name="closed" value="true" />
+      <created>1771857642614</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1771857642614</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix colors add card">
+      <option name="closed" value="true" />
+      <created>1771860333501</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1771860333501</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix colors add card">
+      <option name="closed" value="true" />
+      <created>1771860604241</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1771860604241</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix colors scan card">
+      <option name="closed" value="true" />
+      <created>1771866114584</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1771866114584</updated>
+    </task>
+    <task id="LOCAL-00010" summary="clear">
+      <option name="closed" value="true" />
+      <created>1771866472320</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771866472320</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix buttons">
+      <option name="closed" value="true" />
+      <created>1771868024999</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771868024999</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix buttons">
+      <option name="closed" value="true" />
+      <created>1771869106608</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771869106608</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix buttons colors">
+      <option name="closed" value="true" />
+      <created>1771869423532</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771869423532</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix delete button">
+      <option name="closed" value="true" />
+      <created>1771871643057</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1771871643057</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix card menu button">
+      <option name="closed" value="true" />
+      <created>1771873956586</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771873956586</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix">
+      <option name="closed" value="true" />
+      <created>1771875129286</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1771875129286</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix scanner">
+      <option name="closed" value="true" />
+      <created>1771877136480</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1771877136481</updated>
+    </task>
+    <task id="LOCAL-00018" summary="tune scanner">
+      <option name="closed" value="true" />
+      <created>1771877464966</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771877464966</updated>
+    </task>
+    <task id="LOCAL-00019" summary="tune scanner">
+      <option name="closed" value="true" />
+      <created>1771878526409</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1771878526409</updated>
+    </task>
+    <task id="LOCAL-00020" summary="tune scanner">
+      <option name="closed" value="true" />
+      <created>1771878644467</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1771878644467</updated>
+    </task>
+    <task id="LOCAL-00021" summary="tune scanner">
+      <option name="closed" value="true" />
+      <created>1771880538572</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1771880538572</updated>
+    </task>
+    <task id="LOCAL-00022" summary="wip">
+      <option name="closed" value="true" />
+      <created>1771881886625</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1771881886625</updated>
+    </task>
+    <task id="LOCAL-00023" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771967279799</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1771967279799</updated>
+    </task>
+    <task id="LOCAL-00024" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771970232909</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1771970232909</updated>
+    </task>
+    <task id="LOCAL-00025" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771970750898</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1771970750898</updated>
+    </task>
+    <task id="LOCAL-00026" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771972002529</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1771972002529</updated>
+    </task>
+    <task id="LOCAL-00027" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771972290197</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1771972290197</updated>
+    </task>
+    <task id="LOCAL-00028" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771972834731</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1771972834731</updated>
+    </task>
+    <task id="LOCAL-00029" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771973106698</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1771973106698</updated>
+    </task>
+    <task id="LOCAL-00030" summary="refactor scanner">
+      <option name="closed" value="true" />
+      <created>1771974331013</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1771974331013</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="wip: stable app" />
+    <MESSAGE value="fix naming" />
+    <MESSAGE value="fix colors" />
+    <MESSAGE value="fix colors3" />
+    <MESSAGE value="fix colors add card" />
+    <MESSAGE value="fix colors scan card" />
+    <MESSAGE value="clear" />
+    <MESSAGE value="fix buttons" />
+    <MESSAGE value="fix buttons colors" />
+    <MESSAGE value="fix delete button" />
+    <MESSAGE value="fix card menu button" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="fix scanner" />
+    <MESSAGE value="tune scanner" />
+    <MESSAGE value="wip" />
+    <MESSAGE value="refactor scanner" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor scanner" />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="com.altercard">
+          <value>
+            <CheckInfo lastCheckTimestamp="1771949208250" />
+          </value>
+        </entry>
+        <entry key="com.altercard.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1771949208233" />
+          </value>
+        </entry>
+        <entry key="com.alterpay">
+          <value>
+            <CheckInfo lastCheckTimestamp="1771800954601" />
+          </value>
+        </entry>
+        <entry key="com.alterpay.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1771800954601" />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

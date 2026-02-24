@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="add_button_background_dark">#adc6ff</color>
+    <color name="app_background_dark">#10131a</color>
+    <color name="barcode_icon_color">#FFFFFFFF</color>
+    <color name="button_background_dark">#3f4659</color>
+    <color name="button_text_dark">#d9e0f3</color>
+    <color name="card_dark">#1c1f26</color>
+    <color name="card_text_dark">#e0e3ea</color>
+    <color name="scan_button_background_dark">#2c2f36</color>
+    <style name="AddButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/add_button_background_dark</item>
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
+    </style>
+    <style name="Dialog.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurfaceContainerHigh">@color/card_dark</item>
+    </style>
+    <style name="RoundedButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
+        <item name="backgroundTint">@color/scan_button_background_dark</item>
+        <item name="android:textColor">@color/scan_button_text_dark</item>
+        <item name="iconTint">@android:color/white</item>
+    </style>
+    <style name="Theme.altercard" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/card_text_dark</item>
+        <item name="colorPrimaryContainer">@color/button_background_dark</item>
+        <item name="colorOnPrimaryContainer">@color/button_text_dark</item>
+
+        
+        <item name="colorSurface">@color/app_background_dark</item>
+        <item name="colorSurfaceVariant">@color/card_dark</item>
+        <item name="colorOnSurfaceVariant">@color/card_text_dark</item>
+        <item name="colorOnSurface">@color/card_text_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+
+        
+        <item name="colorControlNormal">@color/card_text_dark</item>
+
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
