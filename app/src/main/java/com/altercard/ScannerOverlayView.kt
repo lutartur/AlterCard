@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import androidx.core.graphics.toColorInt
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
@@ -16,7 +17,7 @@ class ScannerOverlayView @JvmOverloads constructor(
 ) : View(context, attrs) {
 
     private val overlayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#99000000")
+        color = "#99000000".toColorInt()
     }
 
     private val clearPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -30,6 +31,23 @@ class ScannerOverlayView @JvmOverloads constructor(
         strokeCap = Paint.Cap.ROUND
     }
 
+    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.WHITE
+        textSize = 14f * resources.displayMetrics.density
+        textAlign = Paint.Align.CENTER
+    }
+
+    private val textBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.BLACK
+        style = Paint.Style.FILL
+    }
+
+    private val textBgRect = RectF()
+    private val textBgCorner = 12f * resources.displayMetrics.density
+    private val textPadH = 16f * resources.displayMetrics.density
+    private val textPadV = 8f * resources.displayMetrics.density
+
+    private val promptText = context.getString(R.string.scanner_prompt)
     private val frameRect = RectF()
     private val cornerRadius = 12f * resources.displayMetrics.density
     private val cornerLength = 6f * resources.displayMetrics.density
@@ -75,5 +93,17 @@ class ScannerOverlayView @JvmOverloads constructor(
         canvas.drawArc(l, b - 2 * cr, l + 2 * cr, b, 90f, 90f, false, borderPaint)
         canvas.drawLine(l + cr, b, l + cr + cl, b, borderPaint)
         canvas.drawLine(l, b - cr - cl, l, b - cr, borderPaint)
+
+        val textY = t * 0.65f - (textPaint.ascent() + textPaint.descent()) / 2f
+        val textHalfWidth = textPaint.measureText(promptText) / 2f
+        val cx = width / 2f
+        textBgRect.set(
+            cx - textHalfWidth - textPadH,
+            textY + textPaint.ascent() - textPadV,
+            cx + textHalfWidth + textPadH,
+            textY + textPaint.descent() + textPadV
+        )
+        canvas.drawRoundRect(textBgRect, textBgCorner, textBgCorner, textBgPaint)
+        canvas.drawText(promptText, cx, textY, textPaint)
     }
 }
