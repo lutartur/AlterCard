@@ -83,7 +83,8 @@ class CardDetailActivity : AppCompatActivity() {
             try {
                 val format = BarcodeFormat.valueOf(barcodeFormatStr)
                 val multiFormatWriter = MultiFormatWriter()
-                val bitMatrix = multiFormatWriter.encode(barcodeData, format, 800, 200)
+                val (w, h) = if (format == BarcodeFormat.QR_CODE) 800 to 800 else 800 to 200
+                val bitMatrix = multiFormatWriter.encode(barcodeData, format, w, h)
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
                 barcodeImageView.setImageBitmap(bitmap)
