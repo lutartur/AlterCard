@@ -43,4 +43,8 @@
     <style name="NormalCaseButton" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="Dialog.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">?attr/colorSurfaceVariant</item>
+    </style>
 </resources>
