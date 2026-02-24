@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -89,6 +90,13 @@ class CardDetailActivity : AppCompatActivity() {
                 val bitMatrix = multiFormatWriter.encode(barcodeData, format, w, h, hints)
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
+                if (format == BarcodeFormat.QR_CODE) {
+                    barcodeImageView.doOnLayout { view ->
+                        val lp = view.layoutParams
+                        lp.height = view.width
+                        view.layoutParams = lp
+                    }
+                }
                 barcodeImageView.setImageBitmap(bitmap)
             } catch (e: Exception) {
                 Toast.makeText(this, "Error generating barcode", Toast.LENGTH_LONG).show()
