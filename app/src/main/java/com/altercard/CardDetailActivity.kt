@@ -34,11 +34,12 @@ class CardDetailActivity : AppCompatActivity() {
         val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "" // Ensure title is empty
+        supportActionBar?.title = ""
 
+        val dp16 = (16 * resources.displayMetrics.density).toInt()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.card_detail_container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(dp16, systemBars.top, dp16, systemBars.bottom)
             insets
         }
 
@@ -54,25 +55,6 @@ class CardDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.detail_card_name).text = card.name
             findViewById<TextView>(R.id.detail_card_number).text = card.number
             generateBarcode(card.barcodeData, card.barcodeFormat)
-        }
-    }
-
-    private fun generateBarcode(barcodeData: String?, barcodeFormatStr: String?) {
-        val barcodeImageView = findViewById<ImageView>(R.id.barcode_image_view)
-        if (barcodeData != null && barcodeFormatStr != null) {
-            try {
-                val format = BarcodeFormat.valueOf(barcodeFormatStr)
-                val multiFormatWriter = MultiFormatWriter()
-                val bitMatrix = multiFormatWriter.encode(barcodeData, format, 800, 200)
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
-                barcodeImageView.setImageBitmap(bitmap)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Error generating barcode", Toast.LENGTH_LONG).show()
-                e.printStackTrace()
-            }
-        } else {
-            // Optionally handle the case where there is no barcode data
         }
     }
 
@@ -92,6 +74,25 @@ class CardDetailActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun generateBarcode(barcodeData: String?, barcodeFormatStr: String?) {
+        val barcodeImageView = findViewById<ImageView>(R.id.barcode_image_view)
+        if (barcodeData != null && barcodeFormatStr != null) {
+            try {
+                val format = BarcodeFormat.valueOf(barcodeFormatStr)
+                val multiFormatWriter = MultiFormatWriter()
+                val bitMatrix = multiFormatWriter.encode(barcodeData, format, 800, 200)
+                val barcodeEncoder = BarcodeEncoder()
+                val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
+                barcodeImageView.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error generating barcode", Toast.LENGTH_LONG).show()
+                e.printStackTrace()
+            }
+        } else {
+            // Optionally handle the case where there is no barcode data
         }
     }
 

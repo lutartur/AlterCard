@@ -24,8 +24,7 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScannerBinding
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
-    private val scanFromFileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        result ->
+    private val scanFromFileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             result.data?.data?.let {
                 val image = InputImage.fromFilePath(this, it)
@@ -46,6 +45,7 @@ class ScannerActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.button_manual_input).setOnClickListener {
+            setResult(RESULT_MANUAL_INPUT)
             finish()
         }
 
@@ -60,10 +60,8 @@ class ScannerActivity : AppCompatActivity() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
             val preview = Preview.Builder()
                 .build()
                 .also {
@@ -71,23 +69,17 @@ class ScannerActivity : AppCompatActivity() {
                 }
 
             val imageAnalyzer = ImageAnalysis.Builder()
-                //.setTargetResolution(Size(1280, 720)) // You can set target resolution if needed
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcode ->
-                        // When barcode is detected, stop the camera and return the result
                         processBarcode(barcode)
                     })
                 }
 
-            // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
-
-                // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageAnalyzer)
 
@@ -132,27 +124,15 @@ class ScannerActivity : AppCompatActivity() {
 
                 scanner.process(image)
                     .addOnSuccessListener { barcodes ->
-                        for (barcode in barcodes) {
-                            // Process only barcodes that are within the center of the screen
-                            val barcodeBoundingBox = barcode.boundingBox
-                            val imageWidth = imageProxy.width
-                            val imageHeight = imageProxy.height
-
-                            if (barcodeBoundingBox != null &&
-                                barcodeBoundingBox.left > imageWidth * 0.2 &&
-                                barcodeBoundingBox.right < imageWidth * 0.8 &&
-                                barcodeBoundingBox.top > imageHeight * 0.2 &&
-                                barcodeBoundingBox.bottom < imageHeight * 0.8) {
-                                listener(barcode)
-                                return@addOnSuccessListener
-                            }
+                        if (barcodes.isNotEmpty()) {
+                            listener(barcodes[0])
                         }
                     }
                     .addOnFailureListener {
                         Log.e(TAG, "Barcode scanning failed", it)
                     }
                     .addOnCompleteListener {
-                        imageProxy.close() // ALWAYS close the imageProxy
+                        imageProxy.close()
                     }
             }
         }
@@ -169,5 +149,6 @@ class ScannerActivity : AppCompatActivity() {
         private const val TAG = "ScannerActivity"
         const val EXTRA_BARCODE_DATA = "com.altercard.scanner.BARCODE_DATA"
         const val EXTRA_BARCODE_FORMAT = "com.altercard.scanner.BARCODE_FORMAT"
+        const val RESULT_MANUAL_INPUT = RESULT_FIRST_USER
     }
 }

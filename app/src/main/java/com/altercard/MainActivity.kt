@@ -1,11 +1,14 @@
 package com.altercard
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,21 +20,41 @@ class MainActivity : AppCompatActivity() {
         CardViewModelFactory((application as AltercardApplication).repository)
     }
 
-    private val addCardActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        result ->
-            if (result.resultCode == RESULT_OK) {
-                result.data?.let {
-                    val name = it.getStringExtra(AddCardActivity.EXTRA_NAME)
-                    val number = it.getStringExtra(AddCardActivity.EXTRA_NUMBER)
-                    val barcodeData = it.getStringExtra(AddCardActivity.EXTRA_BARCODE_DATA)
-                    val barcodeFormat = it.getStringExtra(AddCardActivity.EXTRA_BARCODE_FORMAT)
+    private val addCardLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.let {
+                val name = it.getStringExtra(AddCardActivity.EXTRA_NAME)
+                val number = it.getStringExtra(AddCardActivity.EXTRA_NUMBER)
+                val barcodeData = it.getStringExtra(AddCardActivity.EXTRA_BARCODE_DATA)
+                val barcodeFormat = it.getStringExtra(AddCardActivity.EXTRA_BARCODE_FORMAT)
 
-                    if(name != null && number != null){
-                         val card = Card(name = name, number = number, barcodeData = barcodeData, barcodeFormat = barcodeFormat)
-                         cardViewModel.insert(card)
-                    }
+                if (name != null && number != null) {
+                    cardViewModel.insert(Card(name = name, number = number, barcodeData = barcodeData, barcodeFormat = barcodeFormat))
                 }
             }
+        }
+    }
+
+    private val scannerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val intent = Intent(this, AddCardActivity::class.java)
+        when (result.resultCode) {
+            RESULT_OK -> {
+                val barcodeData = result.data?.getStringExtra(ScannerActivity.EXTRA_BARCODE_DATA)
+                if (barcodeData != null) {
+                    intent.putExtra(AddCardActivity.EXTRA_PREFILL_BARCODE_DATA, barcodeData)
+                }
+                addCardLauncher.launch(intent)
+            }
+            ScannerActivity.RESULT_MANUAL_INPUT -> {
+                addCardLauncher.launch(intent)
+            }
+        }
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            scannerLauncher.launch(Intent(this, ScannerActivity::class.java))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<ExtendedFloatingActionButton>(R.id.add_card_fab)
         val nestedScrollView = findViewById<NestedScrollView>(R.id.nested_scroll_view)
         val adapter = CardAdapter()
-        
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -58,10 +81,13 @@ class MainActivity : AppCompatActivity() {
         cardViewModel.allCards.observe(this) { cards ->
             cards?.let { adapter.submitList(it) }
         }
-        
+
         fab.setOnClickListener {
-            val intent = Intent(this, AddCardActivity::class.java)
-            addCardActivityResult.launch(intent)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                scannerLauncher.launch(Intent(this, ScannerActivity::class.java))
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
         }
     }
 }

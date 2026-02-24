@@ -63,6 +63,12 @@ class AddCardActivity : AppCompatActivity() {
         editCardName = findViewById(R.id.edit_card_name)
         editCardNumber = findViewById(R.id.edit_card_number)
 
+        intent.getStringExtra(EXTRA_PREFILL_BARCODE_DATA)?.let { prefillData ->
+            barcodeData = prefillData
+            barcodeFormat = BarcodeFormat.CODE_128.name
+            editCardNumber.setText(prefillData)
+        }
+
         val scanButton = findViewById<Button>(R.id.button_scan)
         scanButton.setOnClickListener {
             when {
@@ -114,5 +120,6 @@ class AddCardActivity : AppCompatActivity() {
         const val EXTRA_NUMBER = "com.altercard.card.NUMBER"
         const val EXTRA_BARCODE_DATA = "com.altercard.card.BARCODE_DATA"
         const val EXTRA_BARCODE_FORMAT = "com.altercard.card.BARCODE_FORMAT"
+        const val EXTRA_PREFILL_BARCODE_DATA = "com.altercard.add.PREFILL_BARCODE_DATA"
     }
 }
