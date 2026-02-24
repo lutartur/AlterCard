@@ -109,7 +109,7 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun showSettingsDialog() {
         val items = arrayOf(getString(R.string.action_rename), getString(R.string.action_delete))
-        MaterialAlertDialogBuilder(this, R.style.Dialog_AlertDialog)
+        MaterialAlertDialogBuilder(this)
             .setItems(items) { _, which ->
                 when (which) {
                     0 -> showRenameDialog()
@@ -121,7 +121,7 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun showRenameDialog() {
         val editText = EditText(this)
-        MaterialAlertDialogBuilder(this, R.style.Dialog_AlertDialog)
+        MaterialAlertDialogBuilder(this)
             .setTitle(R.string.action_rename)
             .setView(editText)
             .setPositiveButton(R.string.button_add) { _, _ ->
@@ -138,7 +138,7 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirmationDialog() {
-        MaterialAlertDialogBuilder(this, R.style.Dialog_AlertDialog)
+        MaterialAlertDialogBuilder(this)
             .setTitle(R.string.delete_card_title)
             .setMessage(R.string.delete_card_message)
             .setNegativeButton(R.string.button_cancel, null)
