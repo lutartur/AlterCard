@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -35,6 +36,7 @@ class ScannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
