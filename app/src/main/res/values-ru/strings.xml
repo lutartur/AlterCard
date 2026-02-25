@@ -18,10 +18,10 @@
     <string name="action_navigate_back">Назад</string>
     <string name="toast_camera_permission">Для сканирования необходимо разрешение на использование камеры</string>
     <string name="toast_barcode_error">Ошибка при генерации штрихкода</string>
-    <string name="action_change_color">Изменить цвет</string>
+    <string name="action_change_color">Изменить цвет логотипа</string>
     <string name="color_option_default">По умолчанию</string>
-    <string name="color_option_background">Изменить цвет фона</string>
-    <string name="color_option_text">Изменить цвет текста</string>
+    <string name="color_option_background">Цвет фона логотипа</string>
+    <string name="color_option_text">Цвет символа</string>
     <string name="button_apply">Применить</string>
     <string name="delete_card_title">Удалить карту</string>
     <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>

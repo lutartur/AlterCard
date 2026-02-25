@@ -2,7 +2,6 @@ package com.altercard
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
@@ -16,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
-import com.google.android.material.card.MaterialCardView
+import androidx.core.graphics.toColorInt
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -56,6 +55,7 @@ class CardDetailActivity : AppCompatActivity() {
                 return@observe
             }
             currentCard = card
+            findViewById<TextView>(R.id.detail_card_avatar).text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
             findViewById<TextView>(R.id.detail_card_name).text = card.name
             findViewById<TextView>(R.id.detail_card_number).text = card.number
             applyCardColors(card)
@@ -83,28 +83,17 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun applyCardColors(card: Card) {
-        val cardView = findViewById<MaterialCardView>(R.id.card_name_container)
-        val nameView = findViewById<TextView>(R.id.detail_card_name)
-        val numberView = findViewById<TextView>(R.id.detail_card_number)
+        val avatarView = findViewById<TextView>(R.id.detail_card_avatar)
 
-        if (card.customBackgroundColor != null) {
-            cardView.setCardBackgroundColor(card.customBackgroundColor)
+        avatarView.backgroundTintList = if (card.customBackgroundColor != null) {
+            android.content.res.ColorStateList.valueOf(card.customBackgroundColor)
         } else {
-            val tv = TypedValue()
-            theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant, tv, true)
-            cardView.setCardBackgroundColor(tv.data)
+            null
         }
 
-        if (card.customTextColor != null) {
-            nameView.setTextColor(card.customTextColor)
-            numberView.setTextColor(card.customTextColor)
-        } else {
-            val tv = TypedValue()
-            theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tv, true)
-            nameView.setTextColor(tv.data)
-            theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurface, tv, true)
-            numberView.setTextColor(tv.data)
-        }
+        avatarView.setTextColor(
+            card.customTextColor ?: "#4a5568".toColorInt()
+        )
     }
 
     private fun generateBarcode(barcodeData: String?, barcodeFormatStr: String?) {
@@ -200,7 +189,7 @@ class CardDetailActivity : AppCompatActivity() {
                 val newNumber = editText.text.toString()
                 if (newNumber.isNotEmpty()) {
                     currentCard?.let {
-                        cardViewModel.update(it.copy(number = newNumber))
+                        cardViewModel.update(it.copy(number = newNumber, barcodeData = newNumber))
                     }
                 }
             }
@@ -233,17 +222,9 @@ class CardDetailActivity : AppCompatActivity() {
         val title = if (isBackground) R.string.color_option_background else R.string.color_option_text
 
         val initialColor = if (isBackground) {
-            card.customBackgroundColor ?: run {
-                val tv = TypedValue()
-                theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant, tv, true)
-                tv.data
-            }
+            card.customBackgroundColor ?: "#ebeff2".toColorInt()
         } else {
-            card.customTextColor ?: run {
-                val tv = TypedValue()
-                theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tv, true)
-                tv.data
-            }
+            card.customTextColor ?: "#4a5568".toColorInt()
         }
 
         val colorPicker = ColorPickerView(this)

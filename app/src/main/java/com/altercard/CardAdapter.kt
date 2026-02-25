@@ -1,15 +1,14 @@
 package com.altercard
 
 import android.content.Intent
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 
 class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparator()) {
 
@@ -22,35 +21,27 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
     }
 
     class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.card_view)
+        private val cardAvatar: TextView = itemView.findViewById(R.id.card_avatar)
         private val cardName: TextView = itemView.findViewById(R.id.card_name)
         private val cardNumber: TextView = itemView.findViewById(R.id.card_number)
 
         fun bind(card: Card) {
+            cardAvatar.text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
             cardName.text = card.name
             cardNumber.text = card.number
 
-            val context = itemView.context
-
-            if (card.customBackgroundColor != null) {
-                cardView.setCardBackgroundColor(card.customBackgroundColor)
+            cardAvatar.backgroundTintList = if (card.customBackgroundColor != null) {
+                android.content.res.ColorStateList.valueOf(card.customBackgroundColor)
             } else {
-                val tv = TypedValue()
-                context.theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant, tv, true)
-                cardView.setCardBackgroundColor(tv.data)
+                null
             }
 
-            if (card.customTextColor != null) {
-                cardName.setTextColor(card.customTextColor)
-                cardNumber.setTextColor(card.customTextColor)
-            } else {
-                val tv = TypedValue()
-                context.theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tv, true)
-                cardName.setTextColor(tv.data)
-                cardNumber.setTextColor(tv.data)
-            }
+            cardAvatar.setTextColor(
+                card.customTextColor ?: "#4a5568".toColorInt()
+            )
 
             itemView.setOnClickListener {
+                val context = itemView.context
                 val intent = Intent(context, CardDetailActivity::class.java).apply {
                     putExtra(CardDetailActivity.EXTRA_ID, card.id)
                 }
