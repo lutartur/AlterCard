@@ -51,7 +51,7 @@ class CardDetailActivity : AppCompatActivity() {
         val cardId = intent.getIntExtra(EXTRA_ID, -1)
 
         cardViewModel.getCard(cardId).observe(this) { card ->
-            if (card == null) {
+            if (card == null || card.isDeleted) {
                 finish()
                 return@observe
             }
