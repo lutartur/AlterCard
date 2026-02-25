@@ -10,5 +10,7 @@ data class Card(
     val name: String,
     val number: String,
     val barcodeData: String? = null,
-    val barcodeFormat: String? = null
+    val barcodeFormat: String? = null,
+    val customBackgroundColor: Int? = null,
+    val customTextColor: Int? = null
 )

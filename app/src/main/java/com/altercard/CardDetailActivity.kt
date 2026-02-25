@@ -2,6 +2,7 @@ package com.altercard
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -50,13 +52,13 @@ class CardDetailActivity : AppCompatActivity() {
 
         cardViewModel.getCard(cardId).observe(this) { card ->
             if (card == null) {
-                // The card has been deleted, so finish this activity
                 finish()
                 return@observe
             }
             currentCard = card
             findViewById<TextView>(R.id.detail_card_name).text = card.name
             findViewById<TextView>(R.id.detail_card_number).text = card.number
+            applyCardColors(card)
             generateBarcode(card.barcodeData, card.barcodeFormat)
         }
     }
@@ -77,6 +79,31 @@ class CardDetailActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun applyCardColors(card: Card) {
+        val cardView = findViewById<MaterialCardView>(R.id.card_name_container)
+        val nameView = findViewById<TextView>(R.id.detail_card_name)
+        val numberView = findViewById<TextView>(R.id.detail_card_number)
+
+        if (card.customBackgroundColor != null) {
+            cardView.setCardBackgroundColor(card.customBackgroundColor)
+        } else {
+            val tv = TypedValue()
+            theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant, tv, true)
+            cardView.setCardBackgroundColor(tv.data)
+        }
+
+        if (card.customTextColor != null) {
+            nameView.setTextColor(card.customTextColor)
+            numberView.setTextColor(card.customTextColor)
+        } else {
+            val tv = TypedValue()
+            theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tv, true)
+            nameView.setTextColor(tv.data)
+            theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurface, tv, true)
+            numberView.setTextColor(tv.data)
         }
     }
 
@@ -103,18 +130,23 @@ class CardDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error generating barcode", Toast.LENGTH_LONG).show()
                 e.printStackTrace()
             }
-        } else {
-            // Optionally handle the case where there is no barcode data
         }
     }
 
     private fun showSettingsDialog() {
-        val items = arrayOf(getString(R.string.action_rename), getString(R.string.action_delete))
+        val items = arrayOf(
+            getString(R.string.action_rename),
+            getString(R.string.action_change_number),
+            getString(R.string.action_change_color),
+            getString(R.string.action_delete)
+        )
         MaterialAlertDialogBuilder(this)
             .setItems(items) { _, which ->
                 when (which) {
                     0 -> showRenameDialog()
-                    1 -> showDeleteConfirmationDialog()
+                    1 -> showChangeNumberDialog()
+                    2 -> showColorOptionsDialog()
+                    3 -> showDeleteConfirmationDialog()
                 }
             }
             .show()
@@ -140,10 +172,104 @@ class CardDetailActivity : AppCompatActivity() {
                 val newName = editText.text.toString()
                 if (newName.isNotEmpty()) {
                     currentCard?.let {
-                        val updatedCard = it.copy(name = newName)
-                        cardViewModel.update(updatedCard)
+                        cardViewModel.update(it.copy(name = newName))
                     }
                 }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun showChangeNumberDialog() {
+        val editText = EditText(this)
+        editText.setText(currentCard?.number)
+        editText.setSelection(editText.text.length)
+        val container = FrameLayout(this)
+        val margin = (24 * resources.displayMetrics.density).toInt()
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(margin, 0, margin, 0)
+        editText.layoutParams = params
+        container.addView(editText)
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.action_change_number)
+            .setView(container)
+            .setPositiveButton(R.string.button_add) { _, _ ->
+                val newNumber = editText.text.toString()
+                if (newNumber.isNotEmpty()) {
+                    currentCard?.let {
+                        cardViewModel.update(it.copy(number = newNumber))
+                    }
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun showColorOptionsDialog() {
+        val items = arrayOf(
+            getString(R.string.color_option_default),
+            getString(R.string.color_option_background),
+            getString(R.string.color_option_text)
+        )
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.action_change_color)
+            .setItems(items) { _, which ->
+                when (which) {
+                    0 -> currentCard?.let {
+                        cardViewModel.update(it.copy(customBackgroundColor = null, customTextColor = null))
+                    }
+                    1 -> showColorPickerDialog(isBackground = true)
+                    2 -> showColorPickerDialog(isBackground = false)
+                }
+            }
+            .show()
+    }
+
+    private fun showColorPickerDialog(isBackground: Boolean) {
+        val card = currentCard ?: return
+        val title = if (isBackground) R.string.color_option_background else R.string.color_option_text
+
+        val initialColor = if (isBackground) {
+            card.customBackgroundColor ?: run {
+                val tv = TypedValue()
+                theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant, tv, true)
+                tv.data
+            }
+        } else {
+            card.customTextColor ?: run {
+                val tv = TypedValue()
+                theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, tv, true)
+                tv.data
+            }
+        }
+
+        val colorPicker = ColorPickerView(this)
+        colorPicker.setColor(initialColor)
+
+        val padding = (16 * resources.displayMetrics.density).toInt()
+        val container = FrameLayout(this)
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(padding, padding, padding, padding)
+        colorPicker.layoutParams = params
+        container.addView(colorPicker)
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(title)
+            .setView(container)
+            .setPositiveButton(R.string.button_apply) { _, _ ->
+                val selectedColor = colorPicker.getColor()
+                val updated = if (isBackground) {
+                    card.copy(customBackgroundColor = selectedColor)
+                } else {
+                    card.copy(customTextColor = selectedColor)
+                }
+                cardViewModel.update(updated)
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
