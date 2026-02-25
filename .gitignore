@@ -10,6 +10,9 @@ local.properties
 .idea/
 *.iml
 
+# Claude Code
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db
