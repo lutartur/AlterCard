@@ -1,7 +1,6 @@
 package com.altercard
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -10,8 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CardDao {
-    @Query("SELECT * FROM cards ORDER BY name ASC")
+    @Query("SELECT * FROM cards WHERE isDeleted = 0 ORDER BY name ASC")
     fun getAllCards(): Flow<List<Card>>
+
+    @Query("SELECT * FROM cards ORDER BY name ASC")
+    fun getAllCardsForSync(): Flow<List<Card>>
 
     @Query("SELECT * FROM cards WHERE id = :id")
     fun getCard(id: Int): Flow<Card?>
@@ -24,7 +26,4 @@ interface CardDao {
 
     @Update
     suspend fun update(card: Card)
-
-    @Delete
-    suspend fun delete(card: Card)
 }

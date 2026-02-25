@@ -13,5 +13,6 @@ data class Card(
     val barcodeFormat: String? = null,
     val customBackgroundColor: Int? = null,
     val customTextColor: Int? = null,
-    val lastModified: Long = 0L
+    val lastModified: Long = 0L,
+    val isDeleted: Boolean = false
 )

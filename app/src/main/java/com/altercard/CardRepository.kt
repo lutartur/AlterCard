@@ -18,6 +18,8 @@ class CardRepository(private val cardDao: CardDao) {
     val allCards: Flow<List<Card>> = cardDao.getAllCards()
         .map { cards -> cards.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name }) }
 
+    val allCardsForSync: Flow<List<Card>> = cardDao.getAllCardsForSync()
+
     fun getCard(id: Int): Flow<Card?> = cardDao.getCard(id)
 
     suspend fun insert(card: Card) {
@@ -33,7 +35,7 @@ class CardRepository(private val cardDao: CardDao) {
     }
 
     suspend fun delete(card: Card) {
-        cardDao.delete(card)
+        cardDao.upsert(card.copy(isDeleted = true, lastModified = System.currentTimeMillis()))
         triggerAutoUpload()
     }
 
@@ -44,7 +46,7 @@ class CardRepository(private val cardDao: CardDao) {
     private fun triggerAutoUpload() {
         val sm = syncManager ?: return
         repoScope.launch {
-            val currentCards = allCards.first()
+            val currentCards = allCardsForSync.first()
             sm.autoUpload(currentCards)
         }
     }

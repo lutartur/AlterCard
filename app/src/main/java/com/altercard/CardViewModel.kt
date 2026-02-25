@@ -55,7 +55,7 @@ class CardViewModel(
         }
         viewModelScope.launch {
             _syncState.value = SyncState.Syncing
-            val localCards = repository.allCards.first()
+            val localCards = repository.allCardsForSync.first()
             val result = syncManager.manualSync(localCards)
             _syncState.value = when (result) {
                 is SyncResult.Success -> SyncState.Success
