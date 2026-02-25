@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">AlterCard</string>
+    <string name="add_new_card">Добавить</string>
+    <string name="hint_card_name">Название карты</string>
+    <string name="hint_card_number">Номер карты</string>
+    <string name="button_add">Добавить</string>
+    <string name="button_scan">Сканировать карту</string>
+    <string name="barcode_image">Изображение штрихкода</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_rename">Изменить имя</string>
+    <string name="action_change_number">Изменить номер</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_add_card">Добавить карту</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="button_manual_input">Ввести вручную</string>
+    <string name="button_scan_from_file">Из файла</string>
+    <string name="scanner_prompt">Поместите штрихкод в центр рамки</string>
+    <string name="action_navigate_back">Назад</string>
+    <string name="toast_camera_permission">Для сканирования необходимо разрешение на использование камеры</string>
+    <string name="toast_barcode_error">Ошибка при генерации штрихкода</string>
+    <string name="action_change_color">Изменить цвет</string>
+    <string name="color_option_default">По умолчанию</string>
+    <string name="color_option_background">Изменить цвет фона</string>
+    <string name="color_option_text">Изменить цвет текста</string>
+    <string name="button_apply">Применить</string>
+    <string name="delete_card_title">Удалить карту</string>
+    <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>
+</resources>
