@@ -127,7 +127,7 @@ class CardDetailActivity : AppCompatActivity() {
                 }
                 barcodeImageView.setImageBitmap(bitmap)
             } catch (e: Exception) {
-                Toast.makeText(this, "Error generating barcode", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.toast_barcode_error, Toast.LENGTH_LONG).show()
                 e.printStackTrace()
             }
         }

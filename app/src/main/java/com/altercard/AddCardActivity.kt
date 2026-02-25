@@ -40,7 +40,7 @@ class AddCardActivity : AppCompatActivity() {
         if (isGranted) {
             startScanner()
         } else {
-            Toast.makeText(this, "Camera permission is required to scan barcodes", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toast_camera_permission, Toast.LENGTH_SHORT).show()
         }
     }
 
