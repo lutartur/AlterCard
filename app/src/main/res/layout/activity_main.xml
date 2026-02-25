@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/app_background"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             app:navigationIcon="@drawable/ic_coffee"
             app:navigationContentDescription="@string/action_support"
             app:title="" />
