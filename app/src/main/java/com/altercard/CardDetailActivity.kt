@@ -171,6 +171,7 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun showChangeNumberDialog() {
         val editText = EditText(this)
+        editText.inputType = android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
         editText.setText(currentCard?.number)
         editText.setSelection(editText.text.length)
         val container = FrameLayout(this)
