@@ -176,7 +176,7 @@ class CardDetailActivity : AppCompatActivity() {
                     }
                 }
             }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(R.string.button_cancel, null)
             .show()
     }
 
@@ -204,7 +204,7 @@ class CardDetailActivity : AppCompatActivity() {
                     }
                 }
             }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(R.string.button_cancel, null)
             .show()
     }
 
@@ -271,7 +271,7 @@ class CardDetailActivity : AppCompatActivity() {
                 }
                 cardViewModel.update(updated)
             }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(R.string.button_cancel, null)
             .show()
     }
 
