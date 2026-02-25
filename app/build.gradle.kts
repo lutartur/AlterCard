@@ -27,6 +27,16 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources.excludes += setOf(
+            "META-INF/INDEX.LIST",
+            "META-INF/DEPENDENCIES",
+            "META-INF/LICENSE",
+            "META-INF/LICENSE.txt",
+            "META-INF/NOTICE",
+            "META-INF/NOTICE.txt"
+        )
+    }
 }
 
 dependencies {
@@ -55,4 +65,16 @@ dependencies {
 
     // ZXing for barcode generation
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+
+    // Google Drive sync
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.google.api-client:google-api-client-android:2.7.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    implementation("com.google.apis:google-api-services-drive:v3-rev20240914-2.0.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    implementation("com.google.http-client:google-http-client-gson:1.44.2") {
+        exclude(group = "org.apache.httpcomponents")
+    }
 }

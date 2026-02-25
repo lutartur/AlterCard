@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
-import androidx.core.graphics.toColorInt
+import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -25,7 +25,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 class CardDetailActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory((application as AltercardApplication).repository)
+        val app = application as AltercardApplication
+        CardViewModelFactory(app.repository, app)
     }
 
     private var currentCard: Card? = null
@@ -92,7 +93,7 @@ class CardDetailActivity : AppCompatActivity() {
         }
 
         avatarView.setTextColor(
-            card.customTextColor ?: "#4a5568".toColorInt()
+            card.customTextColor ?: ContextCompat.getColor(this, R.color.avatar_letter)
         )
     }
 
@@ -117,7 +118,6 @@ class CardDetailActivity : AppCompatActivity() {
                 barcodeImageView.setImageBitmap(bitmap)
             } catch (e: Exception) {
                 Toast.makeText(this, R.string.toast_barcode_error, Toast.LENGTH_LONG).show()
-                e.printStackTrace()
             }
         }
     }
@@ -222,9 +222,9 @@ class CardDetailActivity : AppCompatActivity() {
         val title = if (isBackground) R.string.color_option_background else R.string.color_option_text
 
         val initialColor = if (isBackground) {
-            card.customBackgroundColor ?: "#ebeff2".toColorInt()
+            card.customBackgroundColor ?: ContextCompat.getColor(this, R.color.avatar_background)
         } else {
-            card.customTextColor ?: "#4a5568".toColorInt()
+            card.customTextColor ?: ContextCompat.getColor(this, R.color.avatar_letter)
         }
 
         val colorPicker = ColorPickerView(this)

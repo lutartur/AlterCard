@@ -23,6 +23,13 @@
     <string name="color_option_background">Logo background color</string>
     <string name="color_option_text">Symbol color</string>
     <string name="button_apply">Apply</string>
+    <string name="action_sync">Sync</string>
+    <string name="dialog_sync_title">Google Drive sync</string>
+    <string name="dialog_sync_message">Sign in to Google to automatically back up your cards to Google Drive and sync across devices.</string>
+    <string name="dialog_sync_sign_in">Sign in</string>
+    <string name="dialog_sync_skip">Skip</string>
+    <string name="toast_sync_success">Sync complete</string>
+    <string name="toast_sign_in_failed">Sign-in failed. Please try again.</string>
     <string name="delete_card_title">Delete card</string>
     <string name="delete_card_message">Are you sure you want to delete this card? This action cannot be undone.</string>
 </resources>

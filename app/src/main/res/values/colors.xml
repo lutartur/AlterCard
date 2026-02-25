@@ -14,10 +14,10 @@
     <!-- Light Theme -->
     <color name="primary_light">#465d91</color>
     <color name="app_background_light">#faf9ff</color>
+    <color name="app_background">#faf9ff</color>
     <color name="card_light">#ededf7</color>
 
-    <!-- Main FAB Dark -->
-    <color name="main_fab_background_dark">#3f4659</color>
+
 
     <!-- Scan Button Dark -->
     <color name="scan_button_text_dark">#e0e3ea</color>
@@ -34,4 +34,8 @@
     <color name="button_text_dark">#d9e0f3</color>
 
     <color name="barcode_icon_color">#FF000000</color>
+
+    <!-- Avatar -->
+    <color name="avatar_background">#ebeff2</color>
+    <color name="avatar_letter">#4a5568</color>
 </resources>

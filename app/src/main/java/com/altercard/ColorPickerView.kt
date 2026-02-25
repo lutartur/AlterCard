@@ -170,7 +170,7 @@ class ColorPickerView @JvmOverloads constructor(
 
     private fun isNear(y: Float, rect: RectF) = y in (rect.top - thumbRadius)..(rect.bottom + thumbRadius)
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    override fun onMeasure(widthMeasureSpec: Int, @Suppress("UNUSED_PARAMETER") heightMeasureSpec: Int) {
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val height = (thumbRadius * 2 + previewHeight + gap + barHeight + gap + barHeight + gap + barHeight).toInt()
         setMeasuredDimension(width, height)

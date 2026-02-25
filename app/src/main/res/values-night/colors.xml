@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_background_dark">#10131a</color>
+    <color name="app_background">#10131a</color>
     <color name="card_dark">#1c1f26</color>
     <color name="button_background_dark">#3f4659</color>
     <color name="button_text_dark">#d9e0f3</color>
@@ -8,4 +9,8 @@
     <color name="scan_button_background_dark">#2c2f36</color>
     <color name="add_button_background_dark">#adc6ff</color>
     <color name="barcode_icon_color">#FFFFFFFF</color>
+
+    <!-- Avatar -->
+    <color name="avatar_background">#2c3347</color>
+    <color name="avatar_letter">#c8d0e8</color>
 </resources>

@@ -23,6 +23,13 @@
     <string name="color_option_background">Цвет фона логотипа</string>
     <string name="color_option_text">Цвет символа</string>
     <string name="button_apply">Применить</string>
+    <string name="action_sync">Синхронизация</string>
+    <string name="dialog_sync_title">Синхронизация с Google Диском</string>
+    <string name="dialog_sync_message">Войдите в Google, чтобы автоматически сохранять карты на Google Диск и синхронизировать их между устройствами.</string>
+    <string name="dialog_sync_sign_in">Войти</string>
+    <string name="dialog_sync_skip">Пропустить</string>
+    <string name="toast_sync_success">Синхронизация выполнена</string>
+    <string name="toast_sign_in_failed">Ошибка входа. Попробуйте ещё раз.</string>
     <string name="delete_card_title">Удалить карту</string>
     <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>
 </resources>

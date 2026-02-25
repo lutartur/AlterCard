@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.core.graphics.toColorInt
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparator()) {
@@ -37,7 +37,7 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
             }
 
             cardAvatar.setTextColor(
-                card.customTextColor ?: "#4a5568".toColorInt()
+                card.customTextColor ?: ContextCompat.getColor(itemView.context, R.color.avatar_letter)
             )
 
             itemView.setOnClickListener {
