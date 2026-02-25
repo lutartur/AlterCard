@@ -50,7 +50,7 @@ class CardViewModel(
 
     fun manualSync() {
         val syncManager = application.buildSyncManager() ?: run {
-            _syncState.value = SyncState.Error("Not signed in to Google")
+            _syncState.value = SyncState.Error(application.getString(R.string.error_not_signed_in))
             return
         }
         viewModelScope.launch {

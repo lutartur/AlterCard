@@ -33,6 +33,7 @@
     <string name="delete_card_title">Удалить карту</string>
     <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>
     <string name="action_support">Поддержать проект</string>
+    <string name="error_not_signed_in">Вход в Google не выполнен</string>
     <string name="support_dialog_title">Поддержи проект</string>
     <string name="support_option_bmac">Buy Me a Coffee</string>
     <string name="support_option_boosty">Boosty</string>
