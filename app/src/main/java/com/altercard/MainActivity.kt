@@ -5,6 +5,7 @@ package com.altercard
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
+        toolbar.setNavigationOnClickListener { showSupportDialog() }
 
         val recyclerView = findViewById<RecyclerView>(R.id.cards_recycler_view)
         val fab = findViewById<ExtendedFloatingActionButton>(R.id.add_card_fab)
@@ -199,5 +201,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun startSignIn() {
         signInLauncher.launch(app.driveAuthManager.signInClient.signInIntent)
+    }
+
+    private fun showSupportDialog() {
+        val items = arrayOf(
+            getString(R.string.support_option_bmac),
+            getString(R.string.support_option_boosty)
+        )
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.support_dialog_title)
+            .setItems(items) { _, which ->
+                val url = when (which) {
+                    0 -> URL_BUYMEACOFFEE
+                    else -> URL_BOOSTY
+                }
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+            .show()
+    }
+
+    companion object {
+        private const val URL_BUYMEACOFFEE = "https://buymeacoffee.com/your_username"
+        private const val URL_BOOSTY = "https://boosty.to/your_username"
     }
 }

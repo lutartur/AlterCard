@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/app_background"
+            app:navigationIcon="@drawable/ic_coffee"
+            app:navigationContentDescription="@string/action_support"
             app:title="" />
 
     </com.google.android.material.appbar.AppBarLayout>

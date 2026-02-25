@@ -32,4 +32,8 @@
     <string name="toast_sign_in_failed">Ошибка входа. Попробуйте ещё раз.</string>
     <string name="delete_card_title">Удалить карту</string>
     <string name="delete_card_message">Вы уверены, что хотите удалить эту карту? Это действие нельзя будет отменить.</string>
+    <string name="action_support">Поддержать проект</string>
+    <string name="support_dialog_title">Поддержи проект</string>
+    <string name="support_option_bmac">☕ Buy Me a Coffee</string>
+    <string name="support_option_boosty">⭐ Boosty</string>
 </resources>
