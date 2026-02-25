@@ -10,6 +10,7 @@ import android.graphics.Shader
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.graphics.toColorInt
 
 class ColorPickerView @JvmOverloads constructor(
     context: Context,
@@ -39,7 +40,7 @@ class ColorPickerView @JvmOverloads constructor(
     }
     private val thumbShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        color = Color.parseColor("#44000000")
+        color = "#44000000".toColorInt()
         strokeWidth = 3f * dp
     }
 
@@ -150,7 +151,8 @@ class ColorPickerView @JvmOverloads constructor(
                     else -> -1
                 }
             }
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> activeBar = -1
+            MotionEvent.ACTION_UP -> { performClick(); activeBar = -1 }
+            MotionEvent.ACTION_CANCEL -> activeBar = -1
         }
 
         if (activeBar >= 0 && (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE)) {
@@ -165,6 +167,11 @@ class ColorPickerView @JvmOverloads constructor(
             onColorChanged?.invoke(getColor())
         }
 
+        return true
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
         return true
     }
 

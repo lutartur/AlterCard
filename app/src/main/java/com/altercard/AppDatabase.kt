@@ -17,15 +17,15 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE cards ADD COLUMN customBackgroundColor INTEGER")
-                database.execSQL("ALTER TABLE cards ADD COLUMN customTextColor INTEGER")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE cards ADD COLUMN customBackgroundColor INTEGER")
+                db.execSQL("ALTER TABLE cards ADD COLUMN customTextColor INTEGER")
             }
         }
 
         private val MIGRATION_2_3 = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE cards ADD COLUMN lastModified INTEGER NOT NULL DEFAULT 0")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE cards ADD COLUMN lastModified INTEGER NOT NULL DEFAULT 0")
             }
         }
 

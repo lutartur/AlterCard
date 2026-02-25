@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.altercard"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
@@ -67,7 +67,7 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     // Google Drive sync
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.google.android.gms:play-services-auth:21.5.1")
     implementation("com.google.api-client:google-api-client-android:2.7.0") {
         exclude(group = "org.apache.httpcomponents")
     }

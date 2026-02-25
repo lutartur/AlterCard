@@ -116,7 +116,7 @@ class CardDetailActivity : AppCompatActivity() {
                     }
                 }
                 barcodeImageView.setImageBitmap(bitmap)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 Toast.makeText(this, R.string.toast_barcode_error, Toast.LENGTH_LONG).show()
             }
         }

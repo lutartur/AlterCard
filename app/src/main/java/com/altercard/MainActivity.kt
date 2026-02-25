@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.altercard
 
 import android.Manifest
@@ -16,6 +18,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.core.content.edit
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.appbar.MaterialToolbar
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             task.getResult(ApiException::class.java)
             app.buildSyncManager()
             cardViewModel.restoreFromDrive()
-        } catch (e: ApiException) {
+        } catch (_: ApiException) {
             Toast.makeText(this, R.string.toast_sign_in_failed, Toast.LENGTH_LONG).show()
         }
     }
@@ -182,7 +185,7 @@ class MainActivity : AppCompatActivity() {
     private fun maybeShowSignInDialog() {
         val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         if (prefs.getBoolean(KEY_SIGN_IN_PROMPTED, false)) return
-        prefs.edit().putBoolean(KEY_SIGN_IN_PROMPTED, true).apply()
+        prefs.edit { putBoolean(KEY_SIGN_IN_PROMPTED, true) }
 
         if (app.driveAuthManager.isSignedIn()) return
 
