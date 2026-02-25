@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -121,9 +122,20 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun showRenameDialog() {
         val editText = EditText(this)
+        editText.setText(currentCard?.name)
+        editText.setSelection(editText.text.length)
+        val container = FrameLayout(this)
+        val margin = (24 * resources.displayMetrics.density).toInt()
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(margin, 0, margin, 0)
+        editText.layoutParams = params
+        container.addView(editText)
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.action_rename)
-            .setView(editText)
+            .setView(container)
             .setPositiveButton(R.string.button_add) { _, _ ->
                 val newName = editText.text.toString()
                 if (newName.isNotEmpty()) {
