@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data-extraction-rules>
-    <cloud-backup disableIfNoEncryptionCapabilities="true">
-        <!-- TODO: Add cloud backup rules here. -->
-        <!--       Learn more at https://developer.android.com/guide/topics/data/autobackup       -->
-    </cloud-backup>
-    <device-transfer>
-        <!-- TODO: Add device-to-device transfer rules here. -->
-        <!--       Learn more at https://developer.android.com/guide/topics/data/autobackup       -->
-    </device-transfer>
+    <cloud-backup disableIfNoEncryptionCapabilities="true" />
+    <device-transfer />
 </data-extraction-rules>
