@@ -204,20 +204,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSupportDialog() {
-        val items = arrayOf(
-            getString(R.string.support_option_bmac),
-            getString(R.string.support_option_boosty)
-        )
-        MaterialAlertDialogBuilder(this)
+        val view = layoutInflater.inflate(R.layout.dialog_support, null)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.support_dialog_title)
-            .setItems(items) { _, which ->
-                val url = when (which) {
-                    0 -> URL_BUYMEACOFFEE
-                    else -> URL_BOOSTY
-                }
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-            }
+            .setView(view)
             .show()
+        view.findViewById<android.view.View>(R.id.item_bmac).setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL_BUYMEACOFFEE)))
+            dialog.dismiss()
+        }
+        view.findViewById<android.view.View>(R.id.item_boosty).setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL_BOOSTY)))
+            dialog.dismiss()
+        }
     }
 
     companion object {

@@ -34,6 +34,6 @@
     <string name="delete_card_message">Are you sure you want to delete this card? This action cannot be undone.</string>
     <string name="action_support">Support the project</string>
     <string name="support_dialog_title">Support the project</string>
-    <string name="support_option_bmac">☕ Buy Me a Coffee</string>
-    <string name="support_option_boosty">⭐ Boosty</string>
+    <string name="support_option_bmac">Buy Me a Coffee</string>
+    <string name="support_option_boosty">Boosty</string>
 </resources>
