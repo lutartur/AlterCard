@@ -38,4 +38,5 @@
     <!-- Avatar -->
     <color name="avatar_background">#ebeff2</color>
     <color name="avatar_letter">#4a5568</color>
+
 </resources>
