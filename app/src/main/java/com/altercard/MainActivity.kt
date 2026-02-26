@@ -5,7 +5,6 @@ package com.altercard
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,22 +14,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.edit
+import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.net.toUri
+import com.altercard.databinding.ActivityMainBinding
+import com.altercard.databinding.DialogSupportBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.launch
+import androidx.lifecycle.lifecycleScope
 
 private const val PREFS_NAME = "altercard_prefs"
 private const val KEY_SIGN_IN_PROMPTED = "sign_in_prompted"
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val app get() = application as AltercardApplication
 
@@ -105,25 +106,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.title = ""
-        toolbar.setNavigationOnClickListener { showSupportDialog() }
+        binding.toolbar.setNavigationOnClickListener { showSupportDialog() }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.cards_recycler_view)
-        val fab = findViewById<ExtendedFloatingActionButton>(R.id.add_card_fab)
-        val nestedScrollView = findViewById<NestedScrollView>(R.id.nested_scroll_view)
         val adapter = CardAdapter()
+        binding.cardsRecyclerView.adapter = adapter
+        binding.cardsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        nestedScrollView.setOnScrollChangeListener(
+        binding.nestedScrollView.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-                if (scrollY > oldScrollY && fab.isExtended) fab.shrink()
-                else if (scrollY < oldScrollY && !fab.isExtended) fab.extend()
+                if (scrollY > oldScrollY && binding.addCardFab.isExtended) binding.addCardFab.shrink()
+                else if (scrollY < oldScrollY && !binding.addCardFab.isExtended) binding.addCardFab.extend()
             }
         )
 
@@ -131,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             cards?.let { adapter.submitList(it) }
         }
 
-        fab.setOnClickListener {
+        binding.addCardFab.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
                 scannerLauncher.launch(Intent(this, ScannerActivity::class.java))
@@ -204,17 +201,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSupportDialog() {
-        val view = layoutInflater.inflate(R.layout.dialog_support, null)
+        val dialogBinding = DialogSupportBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.support_dialog_title)
-            .setView(view)
+            .setView(dialogBinding.root)
             .show()
-        view.findViewById<android.view.View>(R.id.item_bmac).setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL_BUYMEACOFFEE)))
+        dialogBinding.itemBmac.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, URL_BUYMEACOFFEE.toUri()))
             dialog.dismiss()
         }
-        view.findViewById<android.view.View>(R.id.item_boosty).setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL_BOOSTY)))
+        dialogBinding.itemBoosty.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, URL_BOOSTY.toUri()))
             dialog.dismiss()
         }
     }

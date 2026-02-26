@@ -6,8 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,12 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.altercard.databinding.ActivityAddCardBinding
 import com.google.zxing.BarcodeFormat
 
 class AddCardActivity : AppCompatActivity() {
 
-    private lateinit var editCardName: EditText
-    private lateinit var editCardNumber: EditText
+    private lateinit var binding: ActivityAddCardBinding
     private var barcodeData: String? = null
     private var barcodeFormat: String? = null
 
@@ -30,7 +28,7 @@ class AddCardActivity : AppCompatActivity() {
             result.data?.let {
                 barcodeData = it.getStringExtra(ScannerActivity.EXTRA_BARCODE_DATA)
                 barcodeFormat = it.getStringExtra(ScannerActivity.EXTRA_BARCODE_FORMAT)
-                editCardNumber.setText(barcodeData)
+                binding.editCardNumber.setText(barcodeData)
             }
         }
     }
@@ -47,30 +45,26 @@ class AddCardActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_card)
+        binding = ActivityAddCardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.add_card_container)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.addCardContainer) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom + ime.bottom)
             insets
         }
 
-        editCardName = findViewById(R.id.edit_card_name)
-        editCardNumber = findViewById(R.id.edit_card_number)
-
         intent.getStringExtra(EXTRA_PREFILL_BARCODE_DATA)?.let { prefillData ->
             barcodeData = prefillData
             barcodeFormat = intent.getStringExtra(EXTRA_PREFILL_BARCODE_FORMAT) ?: BarcodeFormat.CODE_128.name
-            editCardNumber.setText(prefillData)
+            binding.editCardNumber.setText(prefillData)
         }
 
-        val scanButton = findViewById<Button>(R.id.button_scan)
-        scanButton.setOnClickListener {
+        binding.buttonScan.setOnClickListener {
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
                     startScanner()
@@ -81,14 +75,13 @@ class AddCardActivity : AppCompatActivity() {
             }
         }
 
-        val addButton = findViewById<Button>(R.id.button_add)
-        addButton.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(editCardName.text) || TextUtils.isEmpty(editCardNumber.text)) {
+            if (TextUtils.isEmpty(binding.editCardName.text) || TextUtils.isEmpty(binding.editCardNumber.text)) {
                 setResult(RESULT_CANCELED, replyIntent)
             } else {
-                val cardName = editCardName.text.toString()
-                val cardNumber = editCardNumber.text.toString()
+                val cardName = binding.editCardName.text.toString()
+                val cardNumber = binding.editCardNumber.text.toString()
                 replyIntent.putExtra(EXTRA_NAME, cardName)
                 replyIntent.putExtra(EXTRA_NUMBER, cardNumber)
                 replyIntent.putExtra(EXTRA_BARCODE_DATA, barcodeData ?: cardNumber)

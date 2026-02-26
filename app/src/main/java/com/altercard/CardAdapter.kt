@@ -2,13 +2,12 @@ package com.altercard
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.altercard.databinding.ListItemCardBinding
 
 class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparator()) {
 
@@ -20,28 +19,25 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
         holder.bind(getItem(position))
     }
 
-    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val cardAvatar: TextView = itemView.findViewById(R.id.card_avatar)
-        private val cardName: TextView = itemView.findViewById(R.id.card_name)
-        private val cardNumber: TextView = itemView.findViewById(R.id.card_number)
+    class CardViewHolder(private val binding: ListItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(card: Card) {
-            cardAvatar.text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
-            cardName.text = card.name
-            cardNumber.text = card.number
+            binding.cardAvatar.text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
+            binding.cardName.text = card.name
+            binding.cardNumber.text = card.number
 
-            cardAvatar.backgroundTintList = if (card.customBackgroundColor != null) {
+            binding.cardAvatar.backgroundTintList = if (card.customBackgroundColor != null) {
                 android.content.res.ColorStateList.valueOf(card.customBackgroundColor)
             } else {
                 null
             }
 
-            cardAvatar.setTextColor(
-                card.customTextColor ?: ContextCompat.getColor(itemView.context, R.color.avatar_letter)
+            binding.cardAvatar.setTextColor(
+                card.customTextColor ?: ContextCompat.getColor(binding.root.context, R.color.avatar_letter)
             )
 
-            itemView.setOnClickListener {
-                val context = itemView.context
+            binding.root.setOnClickListener {
+                val context = binding.root.context
                 val intent = Intent(context, CardDetailActivity::class.java).apply {
                     putExtra(CardDetailActivity.EXTRA_ID, card.id)
                 }
@@ -51,9 +47,8 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
 
         companion object {
             fun create(parent: ViewGroup): CardViewHolder {
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item_card, parent, false)
-                return CardViewHolder(view)
+                val binding = ListItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return CardViewHolder(binding)
             }
         }
     }

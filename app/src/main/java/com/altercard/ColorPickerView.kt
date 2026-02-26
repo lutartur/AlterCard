@@ -61,6 +61,8 @@ class ColorPickerView @JvmOverloads constructor(
         hue = hsv[0]
         saturation = hsv[1]
         value = hsv[2]
+        buildSatShader()
+        buildValShader()
         invalidate()
     }
 
@@ -82,6 +84,8 @@ class ColorPickerView @JvmOverloads constructor(
         valRect.set(pad, top, w - pad, top + barHeight)
 
         buildHueShader()
+        buildSatShader()
+        buildValShader()
     }
 
     private fun buildHueShader() {
@@ -113,9 +117,6 @@ class ColorPickerView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        buildSatShader()
-        buildValShader()
-
         // Preview
         previewPaint.color = getColor()
         canvas.drawRoundRect(previewRect, cornerRadius, cornerRadius, previewPaint)
@@ -159,9 +160,9 @@ class ColorPickerView @JvmOverloads constructor(
             val rect = when (activeBar) { 0 -> hueRect; 1 -> satRect; else -> valRect }
             val fraction = ((x - rect.left) / rect.width()).coerceIn(0f, 1f)
             when (activeBar) {
-                0 -> hue = fraction * 360f
-                1 -> saturation = fraction
-                2 -> value = fraction
+                0 -> { hue = fraction * 360f; buildSatShader(); buildValShader() }
+                1 -> { saturation = fraction; buildValShader() }
+                2 -> { value = fraction; buildSatShader() }
             }
             invalidate()
             onColorChanged?.invoke(getColor())

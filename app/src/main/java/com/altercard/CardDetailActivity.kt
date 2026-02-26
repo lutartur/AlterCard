@@ -6,16 +6,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.altercard.databinding.ActivityCardDetailBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -23,6 +26,8 @@ import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
 class CardDetailActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCardDetailBinding
 
     private val cardViewModel: CardViewModel by viewModels {
         val app = application as AltercardApplication
@@ -34,15 +39,15 @@ class CardDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_card_detail)
+        binding = ActivityCardDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
         val dp16 = (16 * resources.displayMetrics.density).toInt()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.card_detail_container)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.cardDetailContainer) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(dp16, systemBars.top, dp16, systemBars.bottom)
             insets
@@ -56,9 +61,9 @@ class CardDetailActivity : AppCompatActivity() {
                 return@observe
             }
             currentCard = card
-            findViewById<TextView>(R.id.detail_card_avatar).text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
-            findViewById<TextView>(R.id.detail_card_name).text = card.name
-            findViewById<TextView>(R.id.detail_card_number).text = card.number
+            binding.detailCardAvatar.text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
+            binding.detailCardName.text = card.name
+            binding.detailCardNumber.text = card.number
             applyCardColors(card)
             generateBarcode(card.barcodeData, card.barcodeFormat)
         }
@@ -84,40 +89,38 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun applyCardColors(card: Card) {
-        val avatarView = findViewById<TextView>(R.id.detail_card_avatar)
-
-        avatarView.backgroundTintList = if (card.customBackgroundColor != null) {
+        binding.detailCardAvatar.backgroundTintList = if (card.customBackgroundColor != null) {
             android.content.res.ColorStateList.valueOf(card.customBackgroundColor)
         } else {
             null
         }
 
-        avatarView.setTextColor(
+        binding.detailCardAvatar.setTextColor(
             card.customTextColor ?: ContextCompat.getColor(this, R.color.avatar_letter)
         )
     }
 
     private fun generateBarcode(barcodeData: String?, barcodeFormatStr: String?) {
-        val barcodeImageView = findViewById<ImageView>(R.id.barcode_image_view)
-        if (barcodeData != null && barcodeFormatStr != null) {
+        if (barcodeData == null || barcodeFormatStr == null) return
+        lifecycleScope.launch {
             try {
                 val format = BarcodeFormat.valueOf(barcodeFormatStr)
-                val multiFormatWriter = MultiFormatWriter()
                 val (w, h) = if (format == BarcodeFormat.QR_CODE) 800 to 800 else 800 to 200
                 val hints = mapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
-                val bitMatrix = multiFormatWriter.encode(barcodeData, format, w, h, hints)
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
+                val bitmap: Bitmap = withContext(Dispatchers.Default) {
+                    val bitMatrix = MultiFormatWriter().encode(barcodeData, format, w, h, hints)
+                    BarcodeEncoder().createBitmap(bitMatrix)
+                }
                 if (format == BarcodeFormat.QR_CODE) {
-                    barcodeImageView.doOnLayout { view ->
+                    binding.barcodeImageView.doOnLayout { view ->
                         val lp = view.layoutParams
                         lp.height = view.width
                         view.layoutParams = lp
                     }
                 }
-                barcodeImageView.setImageBitmap(bitmap)
+                binding.barcodeImageView.setImageBitmap(bitmap)
             } catch (_: Exception) {
-                Toast.makeText(this, R.string.toast_barcode_error, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CardDetailActivity, R.string.toast_barcode_error, Toast.LENGTH_LONG).show()
             }
         }
     }

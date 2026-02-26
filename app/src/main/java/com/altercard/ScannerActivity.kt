@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -43,16 +42,16 @@ class ScannerActivity : AppCompatActivity() {
 
         startCamera()
 
-        findViewById<Button>(R.id.button_cancel).setOnClickListener {
+        binding.buttonCancel.setOnClickListener {
             finish()
         }
 
-        findViewById<Button>(R.id.button_manual_input).setOnClickListener {
+        binding.buttonManualInput.setOnClickListener {
             setResult(RESULT_MANUAL_INPUT)
             finish()
         }
 
-        findViewById<Button>(R.id.button_scan_from_file).setOnClickListener {
+        binding.buttonScanFromFile.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             scanFromFileLauncher.launch(intent)
@@ -72,6 +71,7 @@ class ScannerActivity : AppCompatActivity() {
                 }
 
             val imageAnalyzer = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcode ->
@@ -154,6 +154,8 @@ class ScannerActivity : AppCompatActivity() {
                     .addOnCompleteListener {
                         imageProxy.close()
                     }
+            } else {
+                imageProxy.close()
             }
         }
     }
