@@ -21,6 +21,8 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
 
     class CardViewHolder(private val binding: ListItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        private val defaultTextColor = ContextCompat.getColor(binding.root.context, R.color.avatar_letter)
+
         fun bind(card: Card) {
             binding.cardAvatar.text = card.name.firstOrNull()?.uppercaseChar()?.toString() ?: ""
             binding.cardName.text = card.name
@@ -32,9 +34,7 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(CardsComparato
                 null
             }
 
-            binding.cardAvatar.setTextColor(
-                card.customTextColor ?: ContextCompat.getColor(binding.root.context, R.color.avatar_letter)
-            )
+            binding.cardAvatar.setTextColor(card.customTextColor ?: defaultTextColor)
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

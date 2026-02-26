@@ -24,6 +24,7 @@ class ScannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScannerBinding
     private val cameraExecutor = Executors.newSingleThreadExecutor()
+    private var barcodeAnalyzer: BarcodeAnalyzer? = null
 
     private val scanFromFileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
@@ -70,13 +71,12 @@ class ScannerActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.previewView.surfaceProvider)
                 }
 
+            barcodeAnalyzer = BarcodeAnalyzer { barcode -> processBarcode(barcode) }
             val imageAnalyzer = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor, BarcodeAnalyzer { barcode ->
-                        processBarcode(barcode)
-                    })
+                    it.setAnalyzer(cameraExecutor, barcodeAnalyzer!!)
                 }
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
@@ -103,6 +103,9 @@ class ScannerActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.e(TAG, "Barcode scanning from file failed", it)
+            }
+            .addOnCompleteListener {
+                scanner.close()
             }
     }
 
@@ -133,7 +136,7 @@ class ScannerActivity : AppCompatActivity() {
         else                      -> BarcodeFormat.CODE_128.name
     }
 
-    private class BarcodeAnalyzer(private val listener: (barcode: Barcode) -> Unit) : ImageAnalysis.Analyzer {
+    private class BarcodeAnalyzer(private val listener: (barcode: Barcode) -> Unit) : ImageAnalysis.Analyzer, AutoCloseable {
         private val scanner = BarcodeScanning.getClient(BarcodeScannerOptions.Builder().build())
 
         @SuppressLint("UnsafeOptInUsageError")
@@ -158,10 +161,15 @@ class ScannerActivity : AppCompatActivity() {
                 imageProxy.close()
             }
         }
+
+        override fun close() {
+            scanner.close()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        barcodeAnalyzer?.close()
         if (!cameraExecutor.isShutdown) {
             cameraExecutor.shutdown()
         }

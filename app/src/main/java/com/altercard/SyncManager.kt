@@ -3,6 +3,7 @@ package com.altercard
 import android.content.Intent
 import android.util.Log
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
+import kotlinx.coroutines.flow.first
 
 private const val TAG = "SyncManager"
 
@@ -30,11 +31,19 @@ class SyncManager(
 
     suspend fun restoreFromDrive(): SyncResult {
         return try {
-            val remoteCards = driveRepository.download() ?: return SyncResult.Success
-            for (card in remoteCards) {
-                cardRepository.upsert(card)
+            val localCards = cardRepository.allCardsForSync.first()
+            val remoteCards = driveRepository.download()
+            if (remoteCards == null) {
+                if (localCards.isNotEmpty()) {
+                    driveRepository.upload(localCards)
+                    Log.d(TAG, "No remote data — uploaded ${localCards.size} local cards")
+                }
+                return SyncResult.Success
             }
-            Log.d(TAG, "Restored ${remoteCards.size} cards from Drive")
+            val merged = merge(localCards, remoteCards)
+            applyMergeToDb(localCards, merged)
+            driveRepository.upload(merged)
+            Log.d(TAG, "Restored and merged — ${merged.size} cards total")
             SyncResult.Success
         } catch (e: UserRecoverableAuthIOException) {
             Log.w(TAG, "Drive permission required", e)

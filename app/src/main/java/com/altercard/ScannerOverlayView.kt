@@ -52,18 +52,35 @@ class ScannerOverlayView @JvmOverloads constructor(
     private val cornerRadius = 12f * resources.displayMetrics.density
     private val cornerLength = 6f * resources.displayMetrics.density
 
+    private var textX = 0f
+    private var textY = 0f
+
     init {
         setLayerType(LAYER_TYPE_HARDWARE, null)
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        val frameWidth = w * 0.8f
+        val frameHeight = frameWidth * 0.85f
+        val left = (w - frameWidth) / 2f
+        val top = (h - frameHeight) / 2f
+        frameRect.set(left, top, left + frameWidth, top + frameHeight)
+
+        textX = w / 2f
+        textY = top * 0.65f - (textPaint.ascent() + textPaint.descent()) / 2f
+        val textHalfWidth = textPaint.measureText(promptText) / 2f
+        textBgRect.set(
+            textX - textHalfWidth - textPadH,
+            textY + textPaint.ascent() - textPadV,
+            textX + textHalfWidth + textPadH,
+            textY + textPaint.descent() + textPadV
+        )
+    }
+
     override fun onDraw(canvas: Canvas) {
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), overlayPaint)
-
-        val frameWidth = width * 0.8f
-        val frameHeight = frameWidth * 0.85f
-        val left = (width - frameWidth) / 2f
-        val top = (height - frameHeight) / 2f
-        frameRect.set(left, top, left + frameWidth, top + frameHeight)
 
         canvas.drawRoundRect(frameRect, cornerRadius, cornerRadius, clearPaint)
 
@@ -94,16 +111,7 @@ class ScannerOverlayView @JvmOverloads constructor(
         canvas.drawLine(l + cr, b, l + cr + cl, b, borderPaint)
         canvas.drawLine(l, b - cr - cl, l, b - cr, borderPaint)
 
-        val textY = t * 0.65f - (textPaint.ascent() + textPaint.descent()) / 2f
-        val textHalfWidth = textPaint.measureText(promptText) / 2f
-        val cx = width / 2f
-        textBgRect.set(
-            cx - textHalfWidth - textPadH,
-            textY + textPaint.ascent() - textPadV,
-            cx + textHalfWidth + textPadH,
-            textY + textPaint.descent() + textPadV
-        )
         canvas.drawRoundRect(textBgRect, textBgCorner, textBgCorner, textBgPaint)
-        canvas.drawText(promptText, cx, textY, textPaint)
+        canvas.drawText(promptText, textX, textY, textPaint)
     }
 }

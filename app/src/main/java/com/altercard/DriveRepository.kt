@@ -64,8 +64,8 @@ class DriveRepository(private val credential: GoogleAccountCredential) {
     suspend fun download(): List<Card>? = withContext(Dispatchers.IO) {
         val service = buildDriveService()
         val fileId = findFileId(service) ?: return@withContext null
-        val stream = service.files().get(fileId).executeMediaAsInputStream()
-        val json = stream.bufferedReader().readText()
+        val json = service.files().get(fileId).executeMediaAsInputStream()
+            .use { it.bufferedReader().readText() }
         val type = object : TypeToken<DrivePayload>() {}.type
         val payload: DrivePayload = gson.fromJson(json, type)
         Log.d(TAG, "Downloaded ${payload.cards.size} cards from Drive")
