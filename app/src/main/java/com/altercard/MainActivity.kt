@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val URL_BUYMEACOFFEE = "https://buymeacoffee.com/your_username"
-        private const val URL_BOOSTY = "https://boosty.to/your_username"
+        private const val URL_BUYMEACOFFEE = "https://buymeacoffee.com/lutarttech"
+        private const val URL_BOOSTY = "https://boosty.to/lutarttech/donate"
     }
 }
