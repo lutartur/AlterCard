@@ -6,6 +6,11 @@ app/build/
 # Local configuration
 local.properties
 
+# Signing
+keystore.properties
+*.keystore
+*.jks
+
 # IDE
 .idea/
 *.iml
