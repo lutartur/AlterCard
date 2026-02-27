@@ -16,7 +16,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.altercard"
-        android:memtagMode="async">
+        android:memtagMode="async"
+        android:localeConfig="@xml/locale_config"
+        android:enableOnBackInvokedCallback="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
