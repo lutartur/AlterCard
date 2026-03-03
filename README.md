@@ -275,3 +275,4 @@ UI (Activity) ←→ ViewModel ←→ Repository ←→ Room DAO ←→ SQLite
 - **Coroutines** — асинхронные операции (IO dispatcher)
 - **KSP** — генерация кода Room во время компиляции (быстрее KAPT)
 - **R8/ProGuard** — минификация и обфускация в release-сборке
+
