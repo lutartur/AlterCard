@@ -48,7 +48,7 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.2 (versionCode 3) |
+| Версия приложения  | 1.3 (versionCode 4) |
 
 ---
 
@@ -254,7 +254,7 @@ adb shell am start -n com.altercard/.MainActivity
 
 ## Changelog
 
-### v1.2 (versionCode 3)
+### v1.3 (versionCode 4)
 - Исправлен критический крэш при запуске в release-сборке: R8 вырезал внутренние registrar-классы ML Kit Barcode Scanning (`CommonComponentRegistrar`, `BarcodeRegistrar`, `VisionCommonRegistrar`), что приводило к NPE в `BarcodeAnalyzer` и crash-loop
 - Добавлены ProGuard-правила для сохранения `com.google.mlkit.**` классов
 - Улучшено логирование ошибок Google Sign-In (выводится `statusCode` исключения `ApiException`)
