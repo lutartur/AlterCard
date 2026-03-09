@@ -18,6 +18,11 @@
 # BarcodeFormat values are referenced by name via .name / BarcodeFormat.valueOf()
 -keepnames enum com.google.zxing.BarcodeFormat
 
+# --- ML Kit ---
+-keep class com.google.mlkit.** { *; }
+-keep class com.google.android.gms.internal.mlkit_vision_barcode.** { *; }
+-dontwarn com.google.mlkit.**
+
 # --- Google API Client / Drive ---
 -dontwarn com.google.api.client.**
 -dontwarn com.google.auth.**

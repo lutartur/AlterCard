@@ -45,10 +45,10 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Параметр           | Значение            |
 |--------------------|---------------------|
 | Минимальная версия | Android 12 (API 31) |
-| Целевая версия     | Android 15 (API 36) |
+| Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.1 (versionCode 2) |
+| Версия приложения  | 1.2 (versionCode 3) |
 
 ---
 
@@ -238,6 +238,27 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 # Запуск приложения
 adb shell am start -n com.altercard/.MainActivity
 ```
+
+---
+
+## Changelog
+
+### v1.2 (versionCode 3)
+- Исправлен критический крэш при запуске в release-сборке: R8 вырезал внутренние registrar-классы ML Kit Barcode Scanning, что приводило к NPE в `BarcodeAnalyzer` и падению приложения в crash-loop
+- Добавлены ProGuard-правила для сохранения классов `com.google.mlkit.**`
+- Улучшено логирование ошибок Google Sign-In (теперь выводится `statusCode` исключения)
+
+### v1.1 (versionCode 2)
+- Синхронизация с Google Drive (appDataFolder)
+- Автоматическая загрузка после каждого изменения
+- Ручная синхронизация из меню
+- Merge-стратегия по `lastModified`
+
+### v1.0 (versionCode 1)
+- Первый релиз
+- Хранение карт лояльности
+- Сканирование и генерация штрихкодов
+- Цветовой HSV-пикер
 
 ---
 

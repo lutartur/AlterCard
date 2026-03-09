@@ -6,6 +6,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -47,7 +48,8 @@ class MainActivity : AppCompatActivity() {
             task.getResult(ApiException::class.java)
             app.buildSyncManager()
             cardViewModel.restoreFromDrive()
-        } catch (_: ApiException) {
+        } catch (e: ApiException) {
+            Log.e("MainActivity", "Sign-in failed, statusCode=${e.statusCode}", e)
             Toast.makeText(this, R.string.toast_sign_in_failed, Toast.LENGTH_LONG).show()
         }
     }
