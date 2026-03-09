@@ -48,7 +48,7 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.3 (versionCode 4) |
+| Версия приложения  | 1.4 (versionCode 5) |
 
 ---
 
@@ -253,6 +253,11 @@ adb shell am start -n com.altercard/.MainActivity
 ---
 
 ## Changelog
+
+### v1.4 (versionCode 5)
+- Исправлена критическая проблема с авторизацией в Google Play (statusCode=10): добавлен `requestIdToken` (Web Client ID) в `GoogleSignInOptions`.
+- Обновлен OAuth Consent Screen: статус приложения переведен в "In production".
+- Добавлены SHA-1 отпечатки Google Play App Signing в консоль Google Cloud.
 
 ### v1.3 (versionCode 4)
 - Исправлен критический крэш при запуске в release-сборке: R8 вырезал внутренние registrar-классы ML Kit Barcode Scanning (`CommonComponentRegistrar`, `BarcodeRegistrar`, `VisionCommonRegistrar`), что приводило к NPE в `BarcodeAnalyzer` и crash-loop

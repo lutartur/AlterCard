@@ -13,9 +13,12 @@ import com.google.api.services.drive.DriveScopes
 
 class DriveAuthManager(private val context: Context) {
 
+    private val WEB_CLIENT_ID = "1027334249979-1mq48ug83ss3vpfqcql1pjprebcirj42.apps.googleusercontent.com"
+
     val signInClient: GoogleSignInClient by lazy {
         val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
+            .requestIdToken(WEB_CLIENT_ID)
             .requestScopes(Scope(DriveScopes.DRIVE_APPDATA))
             .build()
         GoogleSignIn.getClient(context, options)
