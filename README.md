@@ -48,7 +48,7 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.4 (versionCode 5) |
+| Версия приложения  | 1.5 (versionCode 6) |
 
 ---
 
@@ -253,6 +253,9 @@ adb shell am start -n com.altercard/.MainActivity
 ---
 
 ## Changelog
+
+### v1.5 (versionCode 6)
+- Исправлена авторизация Google Drive в production-сборке (Google Play): добавлен `requestIdToken` (Web Client ID) в `GoogleSignInOptions`, что устраняло `statusCode=10` (DEVELOPER_ERROR)
 
 ### v1.4 (versionCode 5)
 - Исправлена критическая проблема с авторизацией в Google Play (statusCode=10): добавлен `requestIdToken` (Web Client ID) в `GoogleSignInOptions`.
