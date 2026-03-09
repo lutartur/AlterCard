@@ -56,12 +56,12 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 
 ### Инструменты сборки
 
-| Инструмент                     | Версия |
-|--------------------------------|--------|
-| Kotlin                         | 2.3.10 |
-| Android Gradle Plugin (AGP)    | 9.0.1  |
-| KSP (Kotlin Symbol Processing) | 2.3.6  |
-| Java compatibility             | 11     |
+| Инструмент                     | Версия  |
+|--------------------------------|---------|
+| Kotlin                         | 2.3.10  |
+| Android Gradle Plugin (AGP)    | 9.0.1   |
+| KSP (Kotlin Symbol Processing) | 2.3.6   |
+| Java compatibility             | 11      |
 
 ### Зависимости
 
@@ -77,11 +77,11 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | `androidx.lifecycle:lifecycle-viewmodel-ktx`      | 2.10.0                | ViewModel + Coroutines              |
 | `androidx.lifecycle:lifecycle-livedata-ktx`       | 2.10.0                | LiveData + Coroutines               |
 | `androidx.camera:camera-*`                        | 1.5.3                 | CameraX (превью, анализ, lifecycle) |
-| `com.google.mlkit:barcode-scanning`               | 17.3.0                | Распознавание штрихкодов            |
+| `com.google.mlkit:barcode-scanning`               | 17.3.0                | Распознавание штрихкодов (bundled)  |
 | `com.journeyapps:zxing-android-embedded`          | 4.3.0                 | Генерация штрихкодов                |
 | `com.google.android.gms:play-services-auth`       | 21.5.1                | Google Sign-In                      |
 | `com.google.api-client:google-api-client-android` | 2.7.0                 | Google API клиент для Android       |
-| `com.google.apis:google-api-services-drive`       | v3-rev20240914-2.0.0 | Google Drive API v3                 |
+| `com.google.apis:google-api-services-drive`       | v3-rev20240914-2.0.0  | Google Drive API v3                 |
 | `com.google.http-client:google-http-client-gson`  | 1.44.2                | HTTP клиент + GSON сериализация     |
 
 ---
@@ -90,8 +90,12 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 
 ```
 altercard/
+├── docs/
+│   └── privacy-policy.html             # Страница политики конфиденциальности (GitHub Pages)
 ├── app/
+│   ├── proguard-rules.pro              # Правила R8/ProGuard для release-сборки
 │   └── src/main/
+│       ├── AndroidManifest.xml
 │       ├── java/com/altercard/
 │       │   ├── AltercardApplication.kt     # Application-класс: инициализация DB, Repository, SyncManager
 │       │   │
@@ -100,43 +104,50 @@ altercard/
 │       │   │                               #   customBackgroundColor, customTextColor, lastModified, isDeleted)
 │       │   ├── CardDao.kt                  # DAO: CRUD-операции с базой данных
 │       │   ├── AppDatabase.kt              # Room база данных (версия 4, миграции 1→2→3→4)
-│       │   ├── CardRepository.kt           # Репозиторий: прослойка между DAO и ViewModel
+│       │   ├── CardRepository.kt           # Репозиторий: CRUD + авто-загрузка на Drive после каждого изменения
 │       │   │
 │       │   ├── # --- ViewModel Layer ---
-│       │   ├── CardViewModel.kt            # ViewModel: список карт, состояния синхронизации (SyncState)
+│       │   ├── CardViewModel.kt            # ViewModel + ViewModelFactory + SyncState (sealed class)
 │       │   │
 │       │   ├── # --- UI Layer ---
-│       │   ├── MainActivity.kt             # Список карт (RecyclerView + ExtendedFAB + диалог поддержки проекта + onboarding Google Sign-In)
-│       │   ├── AddCardActivity.kt          # Добавление карты: имя + номер + опциональный скан
-│       │   ├── ScannerActivity.kt          # Сканер штрихкодов (CameraX + ML Kit)
-│       │   ├── CardDetailActivity.kt       # Просмотр карты + штрихкод + настройки
+│       │   ├── MainActivity.kt             # Список карт (RecyclerView + ExtendedFAB + Google Sign-In onboarding)
+│       │   ├── AddCardActivity.kt          # Добавление/редактирование карты: имя + номер + опциональный скан
+│       │   ├── ScannerActivity.kt          # Сканер штрихкодов (CameraX + ML Kit + сканирование из галереи)
+│       │   ├── CardDetailActivity.kt       # Просмотр карты + штрихкод + настройка цветов
 │       │   │
 │       │   ├── # --- Custom Views ---
 │       │   ├── CardAdapter.kt              # RecyclerView ListAdapter с DiffUtil
 │       │   ├── ScannerOverlayView.kt       # Рамка сканера с затемнением и угловыми маркерами
-│       │   ├── ColorPickerView.kt          # HSV-пикер цвета (три слайдера + превью)
+│       │   ├── ColorPickerView.kt          # HSV-пикер цвета (три слайдера: Hue/Saturation/Value + превью)
 │       │   │
 │       │   └── # --- Google Drive Sync ---
 │       │       ├── DriveAuthManager.kt     # Google Sign-In, OAuth credentials (scope: DRIVE_APPDATA)
 │       │       ├── DriveRepository.kt      # Upload/download cards.json в appDataFolder (GSON)
 │       │       └── SyncManager.kt          # Логика синхронизации: авто, ручная, merge по lastModified
-│       │
+│       │                                   # + SyncResult (sealed class)
 │       └── res/
+│           ├── drawable/                       # Иконки и графика (светлая тема)
+│           ├── drawable-night/                 # Иконки и графика (тёмная тема)
 │           ├── layout/
 │           │   ├── activity_main.xml           # Список карт
-│           │   ├── activity_add_card.xml        # Экран добавления карты
+│           │   ├── activity_add_card.xml        # Экран добавления/редактирования карты
 │           │   ├── activity_scanner.xml         # Экран сканера
 │           │   ├── activity_card_detail.xml     # Детальный просмотр карты
 │           │   ├── dialog_support.xml           # Диалог поддержки проекта
 │           │   └── list_item_card.xml           # Элемент списка карт
-│           ├── values/                          # Ресурсы по умолчанию (EN)
+│           ├── menu/
+│           │   ├── menu_main.xml               # Меню MainActivity (кнопка синхронизации)
+│           │   └── menu_card_detail.xml         # Меню CardDetailActivity (настройки)
+│           ├── values/                          # Ресурсы по умолчанию (EN): строки, цвета, темы
 │           ├── values-ru/                       # Русские строки
 │           ├── values-de/                       # Немецкие строки
 │           ├── values-fr/                       # Французские строки
 │           ├── values-it/                       # Итальянские строки
 │           ├── values-es/                       # Испанские строки
-│           └── values-night/                    # Цвета тёмной темы
-├── app/proguard-rules.pro               # Правила R8/ProGuard для release-сборки
+│           ├── values-night/                    # Цвета и стили тёмной темы
+│           └── xml/
+│               ├── data_extraction_rules.xml   # Правила резервного копирования (allowBackup=false)
+│               └── locale_config.xml           # Список поддерживаемых языков
 ├── keystore.properties.example          # Шаблон конфигурации подписи APK
 ├── build.gradle.kts                     # Корневой Gradle (версии плагинов)
 └── settings.gradle.kts                  # Настройки проекта и репозиториев
@@ -244,9 +255,9 @@ adb shell am start -n com.altercard/.MainActivity
 ## Changelog
 
 ### v1.2 (versionCode 3)
-- Исправлен критический крэш при запуске в release-сборке: R8 вырезал внутренние registrar-классы ML Kit Barcode Scanning, что приводило к NPE в `BarcodeAnalyzer` и падению приложения в crash-loop
-- Добавлены ProGuard-правила для сохранения классов `com.google.mlkit.**`
-- Улучшено логирование ошибок Google Sign-In (теперь выводится `statusCode` исключения)
+- Исправлен критический крэш при запуске в release-сборке: R8 вырезал внутренние registrar-классы ML Kit Barcode Scanning (`CommonComponentRegistrar`, `BarcodeRegistrar`, `VisionCommonRegistrar`), что приводило к NPE в `BarcodeAnalyzer` и crash-loop
+- Добавлены ProGuard-правила для сохранения `com.google.mlkit.**` классов
+- Улучшено логирование ошибок Google Sign-In (выводится `statusCode` исключения `ApiException`)
 
 ### v1.1 (versionCode 2)
 - Синхронизация с Google Drive (appDataFolder)
