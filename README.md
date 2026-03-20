@@ -48,7 +48,7 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.5 (versionCode 6) |
+| Версия приложения  | 1.6 (versionCode 7) |
 
 ---
 
@@ -253,6 +253,10 @@ adb shell am start -n com.altercard/.MainActivity
 ---
 
 ## Changelog
+
+### v1.6 (versionCode 7)
+- Снижена минимальная версия Android до 11 (API 30)
+- Автоматическое повышение яркости экрана до 85% при просмотре карты с восстановлением системной яркости при выходе
 
 ### v1.5 (versionCode 6)
 - Исправлена авторизация Google Drive в production-сборке (Google Play): добавлен `requestIdToken` (Web Client ID) в `GoogleSignInOptions`, что устраняло `statusCode=10` (DEVELOPER_ERROR)
