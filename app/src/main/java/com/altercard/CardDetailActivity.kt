@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -67,6 +68,20 @@ class CardDetailActivity : AppCompatActivity() {
             applyCardColors(card)
             generateBarcode(card.barcodeData, card.barcodeFormat)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val attrs = window.attributes
+        attrs.screenBrightness = 0.85f
+        window.attributes = attrs
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val attrs = window.attributes
+        attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        window.attributes = attrs
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

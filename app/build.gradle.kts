@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.altercard"
-        minSdk = 31
+        minSdk = 30
         targetSdk = 36
         versionCode = 6
         versionName = "1.5"
