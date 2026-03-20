@@ -34,6 +34,10 @@
     <style name="RoundedOutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
         <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearance</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:minHeight">64dp</item>
     </style>
 
     <style name="RoundedShapeAppearance">
