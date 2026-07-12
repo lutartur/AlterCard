@@ -49,7 +49,7 @@ QR Code, Code 128, Code 39, Code 93, CODABAR, EAN-13, EAN-8, UPC-A, UPC-E, Data 
 | Целевая версия     | Android 16 (API 36) |
 | Compile SDK        | API 36              |
 | Ориентация экрана  | Только портретная   |
-| Версия приложения  | 1.7 (versionCode 8) |
+| Версия приложения  | 1.8 (versionCode 9) |
 
 ---
 
@@ -253,6 +253,9 @@ adb shell am start -n com.altercard/.MainActivity
 ---
 
 ## Changelog
+
+### v1.8 (versionCode 9)
+- Убрана функция «Поддержать проект» (Buy Me a Coffee / Boosty)
 
 ### v1.7 (versionCode 8)
 - Исправлено отображение кнопок на экране сканера: текст больше не разбивается на 3+ строки на узких экранах, все кнопки одинаковой высоты
