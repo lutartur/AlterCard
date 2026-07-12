@@ -134,7 +134,6 @@ altercard/
 │           │   ├── activity_add_card.xml        # Экран добавления/редактирования карты
 │           │   ├── activity_scanner.xml         # Экран сканера
 │           │   ├── activity_card_detail.xml     # Детальный просмотр карты
-│           │   ├── dialog_support.xml           # Диалог поддержки проекта
 │           │   └── list_item_card.xml           # Элемент списка карт
 │           ├── menu/
 │           │   ├── menu_main.xml               # Меню MainActivity (кнопка синхронизации)
@@ -286,15 +285,6 @@ adb shell am start -n com.altercard/.MainActivity
 - Хранение карт лояльности
 - Сканирование и генерация штрихкодов
 - Цветовой HSV-пикер
-
----
-
-## Поддержка проекта
-
-Если приложение вам полезно, вы можете поддержать разработку:
-
-- [Buy Me a Coffee](https://buymeacoffee.com/lutarttech)
-- [Boosty](https://boosty.to/lutarttech/donate)
 
 ---
 

@@ -32,9 +32,5 @@
     <string name="toast_sign_in_failed">Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.</string>
     <string name="delete_card_title">Karte löschen</string>
     <string name="delete_card_message">Möchten Sie diese Karte wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</string>
-    <string name="action_support">Projekt unterstützen</string>
     <string name="error_not_signed_in">Nicht bei Google angemeldet</string>
-    <string name="support_dialog_title">Projekt unterstützen</string>
-    <string name="support_option_bmac">Buy Me a Coffee</string>
-    <string name="support_option_boosty">Boosty</string>
 </resources>

@@ -18,9 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.core.net.toUri
 import com.altercard.databinding.ActivityMainBinding
-import com.altercard.databinding.DialogSupportBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -113,7 +111,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = ""
-        binding.toolbar.setNavigationOnClickListener { showSupportDialog() }
 
         val adapter = CardAdapter()
         binding.cardsRecyclerView.adapter = adapter
@@ -200,26 +197,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun startSignIn() {
         signInLauncher.launch(app.driveAuthManager.signInClient.signInIntent)
-    }
-
-    private fun showSupportDialog() {
-        val dialogBinding = DialogSupportBinding.inflate(layoutInflater)
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.support_dialog_title)
-            .setView(dialogBinding.root)
-            .show()
-        dialogBinding.itemBmac.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, URL_BUYMEACOFFEE.toUri()))
-            dialog.dismiss()
-        }
-        dialogBinding.itemBoosty.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, URL_BOOSTY.toUri()))
-            dialog.dismiss()
-        }
-    }
-
-    companion object {
-        private const val URL_BUYMEACOFFEE = "https://buymeacoffee.com/lutarttech"
-        private const val URL_BOOSTY = "https://boosty.to/lutarttech/donate"
     }
 }

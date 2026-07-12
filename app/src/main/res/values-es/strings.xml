@@ -32,9 +32,5 @@
     <string name="toast_sign_in_failed">Error al iniciar sesión. Inténtalo de nuevo.</string>
     <string name="delete_card_title">Eliminar tarjeta</string>
     <string name="delete_card_message">¿Estás seguro de que quieres eliminar esta tarjeta? Esta acción no se puede deshacer.</string>
-    <string name="action_support">Apoyar el proyecto</string>
     <string name="error_not_signed_in">No has iniciado sesión en Google</string>
-    <string name="support_dialog_title">Apoyar el proyecto</string>
-    <string name="support_option_bmac">Buy Me a Coffee</string>
-    <string name="support_option_boosty">Boosty</string>
 </resources>
